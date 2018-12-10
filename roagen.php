@@ -89,7 +89,7 @@ foreach($files as $file)
                         } else {
                             $ta = 'NULL';
                         }
-                        if (isset($maxLength)) {
+                        if ($ta == 'DN42' && isset($maxLength)) {
                             $mask = $maxLength;
                         }
                         $roas['roas'][$i]['maxLength'] = $mask;
@@ -107,7 +107,7 @@ foreach($files as $file)
                 } else {
                     $ta = 'NULL';
                 }
-                if (isset($maxLength)) {
+                if ($ta == 'DN42' && isset($maxLength)) {
                     $mask = $maxLength;
                 }
                 $roas['roas'][$i]['maxLength'] = $mask;
@@ -172,7 +172,7 @@ foreach($files as $file)
                         } else {
                             $ta = 'NULL';
                         }
-                        if (isset($maxLength)) {
+                        if ($ta == 'DN42' && isset($maxLength)) {
                             $mask = $maxLength;
                         }
                         $roas['roas'][$i]['maxLength'] = $mask;
@@ -190,7 +190,7 @@ foreach($files as $file)
                 } else {
                     $ta = 'NULL';
                 }
-                if (isset($maxLength)) {
+                if ($ta == 'DN42' && isset($maxLength)) {
                     $mask = $maxLength;
                 }
                 $roas['roas'][$i]['maxLength'] = $mask;
