@@ -93,7 +93,7 @@ foreach($files as $file)
                             $ta = 'NULL';
                         }*/
                         $roas['roas'][$i]['maxLength'] = $mask;
-                        $roas['roas'][$i]['ta'] = $ta;
+                        $roas['roas'][$i]['ta'] = (empty($ta) ? '' : $ta);
                         $i++;
                     }
                 }
@@ -109,7 +109,7 @@ foreach($files as $file)
                     $ta = 'NULL';
                 }*/
                 $roas['roas'][$i]['maxLength'] = $mask;
-                $roas['roas'][$i]['ta'] = (empty($ta) ? NULL : $ta);
+                $roas['roas'][$i]['ta'] = (empty($ta) ? '' : $ta);
                 $i++;
             }
         }
@@ -172,7 +172,7 @@ foreach($files as $file)
                             $ta = 'NULL';
                         }*/
                         $roas['roas'][$i]['maxLength'] = $mask;
-                        $roas['roas'][$i]['ta'] = $ta;
+                        $roas['roas'][$i]['ta'] = (empty($ta) ? '' : $ta);
                         $i++;
                     }
                 }
@@ -188,7 +188,7 @@ foreach($files as $file)
                     $ta = 'NULL';
                 }*/
                 $roas['roas'][$i]['maxLength'] = $mask;
-                $roas['roas'][$i]['ta'] = (empty($ta) ? NULL : $ta);
+                $roas['roas'][$i]['ta'] = (empty($ta) ? '' : $ta);
                 $i++;
             }
         }
