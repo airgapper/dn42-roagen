@@ -68,11 +68,12 @@ foreach($files as $file)
             $mask = $prefix[2];
         }
         // extract var $maxLength
-        $maxLength = ''; // ensure var is null when starting new loop
         if (startsWith($line,'max-length')) {
             $maxLength = array();
             preg_match('/([0-9]+)/',explode(':', $line)[1], $maxLength);
-            $maxLength = (empty($maxLength[1]) ? '' : $maxLength[1]);
+            $maxLength = $maxLength[1];
+        } else {
+            $maxLength = '';
         }
         // extract var $asn
         if (startsWith($line, 'origin')) {
@@ -149,7 +150,9 @@ foreach($files as $file)
         if (startsWith($line,'max-length')) {
             $maxLength = array();
             preg_match('/([0-9]+)/',explode(':', $line)[1], $maxLength);
-            $maxLength = (empty($maxLength[1]) ? '' : $maxLength[1]);
+            $maxLength = $maxLength[1];
+        } else {
+            $maxLength = '';
         }
         // extract var $asn
         if (startsWith($line, 'origin')) {
