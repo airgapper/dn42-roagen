@@ -1,13 +1,26 @@
 <?php
 
+// Before we begin. Ensure registry repository is up-to-date
 echo shell_exec("/usr/bin/git -C ../registry/ pull origin master:master 2>&1");
 
+/*
+ * Function:
+ * startsWith( $string, 'word')
+ * 
+ * Find lines beginning with 'word'.
+ */
 function startsWith($haystack, $needle)
 {
     $length = strlen($needle);
     return (substr($haystack, 0, $length) === $needle);
 }
 
+/*
+ * Function:
+ * endsWith( $string, 'word') 
+ *   
+ * Find lines ending with 'word'.
+ */
 function endsWith($haystack, $needle)
 {
     $length = strlen($needle);
@@ -18,10 +31,20 @@ function endsWith($haystack, $needle)
     return (substr($haystack, -$length) === $needle);
 }
 
+// Create empty array $roas
 $roas = array();
+
+/*
+ *
+ * IPv6 route objects
+ *
+ */
+
+// Set directory for which all files are to be scanned
 $files = scandir('../registry/data/route6/');
+
 $h = 0; // count up when reading new file
-$i = 0;
+$i = 0; // used when loop through sub-arrays. I.e. when route objects have more than one listed origin asn
 
 foreach($files as $file)
 {
@@ -81,11 +104,21 @@ foreach($files as $file)
             }
         }
     }
-    fclose($handle);
+    fclose($handle); // close $file when finished reading data
     $h++;
 }
 
+/*
+ *
+ * IPv4 route objects
+ *
+ */
+
+// Set directory for which all files are to be scanned
 $files = scandir('../registry/data/route/');
+
+$h = 0; // count up when reading new file
+$i = 0; // used when loop through sub-arrays. I.e. when route objects have more than one listed origin asn
 
 foreach($files as $file)
 {
@@ -142,7 +175,7 @@ foreach($files as $file)
             }
         }
     }
-    fclose($handle);
+    fclose($handle); // close $file when finished reading data
     $h++;
 }
 
