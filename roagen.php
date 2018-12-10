@@ -68,13 +68,13 @@ foreach($files as $file)
             $mask = $prefix[2];
         }
         // extract var $maxLength
-        if (startsWith($line,'max-length')) {
+        /*if (startsWith($line,'max-length')) {
             $maxLength = array();
             preg_match('/([0-9]+)/',explode(':', $line)[1], $maxLength);
             $maxLength = $maxLength[1];
         } else {
             $maxLength = '';
-        }
+        }*/
         // extract var $asn
         if (startsWith($line, 'origin')) {
             $asn = array();
@@ -84,14 +84,14 @@ foreach($files as $file)
                     if (!empty($value)) {
                         $roas['roas'][$i]['asn'] = $asn[0];
                         $roas['roas'][$i]['prefix'] = $route;
-                        if (isset($ta)) {
+                        /*if (isset($ta)) {
                             if ($ta == 'DN42') {
                                 $mask = ($mask <= 64 ? '64' : $mask);
                                 if ($maxLength != '') $mask = $maxLength;
                             }
                         } else {
                             $ta = 'NULL';
-                        }
+                        }*/
                         $roas['roas'][$i]['maxLength'] = $mask;
                         $roas['roas'][$i]['ta'] = $ta;
                         $i++;
@@ -100,14 +100,14 @@ foreach($files as $file)
             } else {
                 $roas['roas'][$i]['asn'] = $asn[0];
                 $roas['roas'][$i]['prefix'] = $route;
-                if (isset($ta)) {
+                /*if (isset($ta)) {
                     if ($ta == 'DN42') {
                         $mask = ($mask <= 64 ? '64' : $mask);
                         if ($maxLength != '') $mask = $maxLength;
                     }
                 } else {
                     $ta = 'NULL';
-                }
+                }*/
                 $roas['roas'][$i]['maxLength'] = $mask;
                 $roas['roas'][$i]['ta'] = $ta;
                 $i++;
@@ -146,14 +146,14 @@ foreach($files as $file)
             $mask = $prefix[5];
         }
         // extract var $maxLength
-        $maxLength = ''; // ensure var is null when starting new loop
+        /*$maxLength = ''; // ensure var is null when starting new loop
         if (startsWith($line,'max-length')) {
             $maxLength = array();
             preg_match('/([0-9]+)/',explode(':', $line)[1], $maxLength);
             $maxLength = $maxLength[1];
         } else {
             $maxLength = '';
-        }
+        }*/
         // extract var $asn
         if (startsWith($line, 'origin')) {
             $asn = array();
@@ -163,14 +163,14 @@ foreach($files as $file)
                     if (!empty($value)) {
                         $roas['roas'][$i]['asn'] = $asn[0];
                         $roas['roas'][$i]['prefix'] = $route;
-                        if (isset($ta)) {
+                        /*if (isset($ta)) {
                             if ($ta == 'DN42') {
                                 $mask = ($mask <= 28 ? '28' : $mask);
                                 if ($maxLength != '') $mask = $maxLength;
                             }
                         } else {
                             $ta = 'NULL';
-                        }
+                        }*/
                         $roas['roas'][$i]['maxLength'] = $mask;
                         $roas['roas'][$i]['ta'] = $ta;
                         $i++;
@@ -179,14 +179,14 @@ foreach($files as $file)
             } else {
                 $roas['roas'][$i]['asn'] = $asn[0];
                 $roas['roas'][$i]['prefix'] = $route;
-                if (isset($ta)) {
+                /*if (isset($ta)) {
                     if ($ta == 'DN42') {
                         $mask = ($mask <= 28 ? '28' : $mask);
                         if ($maxLength != '') $mask = $maxLength;
                     }
                 } else {
                     $ta = 'NULL';
-                }
+                }*/
                 $roas['roas'][$i]['maxLength'] = $mask;
                 $roas['roas'][$i]['ta'] = $ta;
                 $i++;
