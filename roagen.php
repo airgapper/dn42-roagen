@@ -68,10 +68,11 @@ foreach($files as $file)
             $mask = $prefix[2];
         }
         // extract var $maxLength
+        $maxLength = ''; // ensure var is null when starting new loop
         if (startsWith($line,'max-length')) {
             $maxLength = array();
             preg_match('/([0-9]+)/',explode(':', $line)[1], $maxLength);
-            $maxLength = $maxLength[1];
+            $maxLength = (empty($maxLength[1]) ? '' : $maxLength[1]);
         }
         // extract var $asn
         if (startsWith($line, 'origin')) {
@@ -83,14 +84,12 @@ foreach($files as $file)
                         $roas['roas'][$i]['asn'] = $asn[0];
                         $roas['roas'][$i]['prefix'] = $route;
                         if (isset($ta)) {
-                            if ($ta != ('ICVPN' || 'CHAOSVPN')) {
+                            if ($ta == 'DN42') {
                                 $mask = ($mask <= 64 ? '64' : $mask);
+                                if ($maxLength != '') $mask = $maxLength;
                             }
                         } else {
                             $ta = 'NULL';
-                        }
-                        if ($ta == 'DN42' && isset($maxLength)) {
-                            $mask = $maxLength;
                         }
                         $roas['roas'][$i]['maxLength'] = $mask;
                         $roas['roas'][$i]['ta'] = $ta;
@@ -101,14 +100,12 @@ foreach($files as $file)
                 $roas['roas'][$i]['asn'] = $asn[0];
                 $roas['roas'][$i]['prefix'] = $route;
                 if (isset($ta)) {
-                    if ($ta != ('ICVPN' || 'CHAOSVPN')) {
+                    if ($ta == 'DN42') {
                         $mask = ($mask <= 64 ? '64' : $mask);
+                        if ($maxLength != '') $mask = $maxLength;
                     }
                 } else {
                     $ta = 'NULL';
-                }
-                if ($ta == 'DN42' && isset($maxLength)) {
-                    $mask = $maxLength;
                 }
                 $roas['roas'][$i]['maxLength'] = $mask;
                 $roas['roas'][$i]['ta'] = $ta;
@@ -150,11 +147,12 @@ foreach($files as $file)
             $route = $prefix[0];
             $mask = $prefix[5];
         }
-        // extract var $maxLength 
+        // extract var $maxLength
+        $maxLength = ''; // ensure var is null when starting new loop
         if (startsWith($line,'max-length')) {
             $maxLength = array();
             preg_match('/([0-9]+)/',explode(':', $line)[1], $maxLength);
-            $maxLength = $maxLength[1];
+            $maxLength = (empty($maxLength[1]) ? '' : $maxLength[1]);
         }
         // extract var $asn
         if (startsWith($line, 'origin')) {
@@ -166,14 +164,12 @@ foreach($files as $file)
                         $roas['roas'][$i]['asn'] = $asn[0];
                         $roas['roas'][$i]['prefix'] = $route;
                         if (isset($ta)) {
-                            if ($ta != ('ICVPN' || 'CHAOSVPN')) {
+                            if ($ta == 'DN42') {
                                 $mask = ($mask <= 28 ? '28' : $mask);
+                                if ($maxLength != '') $mask = $maxLength;
                             }
                         } else {
                             $ta = 'NULL';
-                        }
-                        if ($ta == 'DN42' && isset($maxLength)) {
-                            $mask = $maxLength;
                         }
                         $roas['roas'][$i]['maxLength'] = $mask;
                         $roas['roas'][$i]['ta'] = $ta;
@@ -184,14 +180,12 @@ foreach($files as $file)
                 $roas['roas'][$i]['asn'] = $asn[0];
                 $roas['roas'][$i]['prefix'] = $route;
                 if (isset($ta)) {
-                    if ($ta != ('ICVPN' || 'CHAOSVPN')) {
+                    if ($ta == 'DN42') {
                         $mask = ($mask <= 28 ? '28' : $mask);
+                        if ($maxLength != '') $mask = $maxLength;
                     }
                 } else {
                     $ta = 'NULL';
-                }
-                if ($ta == 'DN42' && isset($maxLength)) {
-                    $mask = $maxLength;
                 }
                 $roas['roas'][$i]['maxLength'] = $mask;
                 $roas['roas'][$i]['ta'] = $ta;
