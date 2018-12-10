@@ -1,6 +1,6 @@
 <?php
 
-echo shell_exec("/usr/bin/git -C ../dn42-registry/ pull origin master:master 2>&1");
+echo shell_exec("/usr/bin/git -C ../registry/ pull origin master:master 2>&1");
 
 function startsWith($haystack, $needle)
 {
@@ -19,13 +19,13 @@ function endsWith($haystack, $needle)
 }
 
 $roas = array();
-$files = scandir('../dn42-registry/data/route6/');
+$files = scandir('../registry/data/route6/');
 $h = 0; // count up when reading new file
 $i = 0;
 
 foreach($files as $file)
 {
-    $handle = fopen("../dn42-registry/data/route6/$file", "r");
+    $handle = fopen("../registry/data/route6/$file", "r");
     while (($line = fgets($handle)) !== false) {
         // extract var $ta
         if (startsWith($line,'source')) {
@@ -39,7 +39,7 @@ foreach($files as $file)
             $prefix = array();
             $line2 = explode('6: ', $line);
             // validate v6 netmasks with following cmd
-            // cmd: ls -1 ../dn42-registry/data/route6/ | egrep -o "\b\_[0-9]+\b" | sed 's/\_//' | sort -n | uniq
+            // cmd: ls -1 ../registry/data/route6/ | egrep -o "\b\_[0-9]+\b" | sed 's/\_//' | sort -n | uniq
             preg_match('/([a-f0-9\:]{0,128})\/(32|40|4[4-9]|5[0-9]|6[0-4]|80)/', $line2[1], $prefix);
             $route = $prefix[0];
             $mask = $prefix[2];
@@ -85,11 +85,11 @@ foreach($files as $file)
     $h++;
 }
 
-$files = scandir('../dn42-registry/data/route/');
+$files = scandir('../registry/data/route/');
 
 foreach($files as $file)
 {
-    $handle = fopen("../dn42-registry/data/route/$file", "r");
+    $handle = fopen("../registry/data/route/$file", "r");
     while (($line = fgets($handle)) !== false) {
     // extract var $ta
         if (startsWith($line,'source')) {
