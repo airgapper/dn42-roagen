@@ -187,10 +187,7 @@ $fp = fopen('dn42-rpki-export.json', 'w');
 fwrite($fp, $json);
 fclose($fp);
 
-// Commit update JSON file
-echo shell_exec("");
-
-// Push to all git remote repositories
+// Commit and push to all git remote repositories
 echo shell_exec("./update.sh 2>&1");
 
 ?>
