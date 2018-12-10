@@ -67,6 +67,12 @@ foreach($files as $file)
             $route = $prefix[0];
             $mask = $prefix[2];
         }
+        // extract var $maxLength
+        if (startsWith($line,'max-length')) {
+            $maxLength = array();
+            preg_match('/([0-9]{2,3})/',explode(':', $line)[1], $maxLength);
+            $maxLength = $maxLength[1];
+        }
         // extract var $asn
         if (startsWith($line, 'origin')) {
             $asn = array();
@@ -83,7 +89,10 @@ foreach($files as $file)
                         } else {
                             $ta = 'NULL';
                         }
-                        $roas['roas'][$i]['maxLength'] = $mask;
+                        if (empty($maxLength)) {
+                            $maxLength = $mask;
+                        }
+                        $roas['roas'][$i]['maxLength'] = $maxLength;
                         $roas['roas'][$i]['ta'] = $ta;
                         $i++;
                     }
@@ -98,7 +107,10 @@ foreach($files as $file)
                 } else {
                     $ta = 'NULL';
                 }
-                $roas['roas'][$i]['maxLength'] = $mask;
+                if (empty($maxLength)) {
+                    $maxLength = $mask;
+                }
+                $roas['roas'][$i]['maxLength'] = $maxLength;
                 $roas['roas'][$i]['ta'] = $ta;
                 $i++;
             }
@@ -138,6 +150,12 @@ foreach($files as $file)
             $route = $prefix[0];
             $mask = $prefix[5];
         }
+        // extract var $maxLength 
+        if (startsWith($line,'max-length')) {
+            $maxLength = array();
+            preg_match('/([0-9]{2,3})/',explode(':', $line)[1], $maxLength);
+            $maxLength = $maxLength[1];
+        }
         // extract var $asn
         if (startsWith($line, 'origin')) {
             $asn = array();
@@ -154,6 +172,9 @@ foreach($files as $file)
                         } else {
                             $ta = 'NULL';
                         }
+                        if (empty($maxLength)) {
+                            $maxLength = $mask;
+                        }
                         $roas['roas'][$i]['maxLength'] = $mask;
                         $roas['roas'][$i]['ta'] = $ta;
                         $i++;
@@ -169,7 +190,10 @@ foreach($files as $file)
                 } else {
                     $ta = 'NULL';
                 }
-                $roas['roas'][$i]['maxLength'] = $mask;
+                if (empty($maxLength)) {
+                    $maxLength = $mask;
+                }
+                $roas['roas'][$i]['maxLength'] = $maxLength;
                 $roas['roas'][$i]['ta'] = $ta;
                 $i++;
             }
