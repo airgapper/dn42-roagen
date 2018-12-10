@@ -77,7 +77,7 @@ foreach($files as $file)
                         $roas['roas'][$i]['asn'] = $asn[0];
                         $roas['roas'][$i]['prefix'] = $route;
                         if (isset($ta)) {
-                            if ($ta == 'DN42') {
+                            if ($ta != ('ICVPN' || 'CHAOSVPN')) {
                                 $mask = ($mask <= 64 ? '64' : $mask);
                             }
                         } else {
@@ -92,7 +92,7 @@ foreach($files as $file)
                 $roas['roas'][$i]['asn'] = $asn[0];
                 $roas['roas'][$i]['prefix'] = $route;
                 if (isset($ta)) {
-                    if ($ta == 'DN42') {
+                    if ($ta != ('ICVPN' || 'CHAOSVPN')) {
                         $mask = ($mask <= 64 ? '64' : $mask);
                     }
                 } else {
@@ -148,7 +148,7 @@ foreach($files as $file)
                         $roas['roas'][$i]['asn'] = $asn[0];
                         $roas['roas'][$i]['prefix'] = $route;
                         if (isset($ta)) {
-                            if ($ta != 'ICVPN') {
+                            if ($ta != ('ICVPN' || 'CHAOSVPN')) {
                                 $mask = ($mask <= 28 ? '28' : $mask);
                             }
                         } else {
@@ -163,7 +163,7 @@ foreach($files as $file)
                 $roas['roas'][$i]['asn'] = $asn[0];
                 $roas['roas'][$i]['prefix'] = $route;
                 if (isset($ta)) {
-                    if ($ta != 'ICVPN') {
+                    if ($ta != ('ICVPN' || 'CHAOSVPN')) {
                         $mask = ($mask <= 28 ? '28' : $mask);
                     }
                 } else {
