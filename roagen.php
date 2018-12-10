@@ -126,9 +126,6 @@ foreach($files as $file)
 // Set directory for which all files are to be scanned
 $files = scandir('../registry/data/route/');
 
-$h = 0; // count up when reading new file
-$i = 0; // used when loop through sub-arrays. I.e. when route objects have more than one listed origin asn
-
 foreach($files as $file)
 {
     $handle = fopen("../registry/data/route/$file", "r");
