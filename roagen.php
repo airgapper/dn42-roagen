@@ -175,7 +175,7 @@ foreach($files as $file)
                         if (empty($maxLength)) {
                             $maxLength = $mask;
                         }
-                        $roas['roas'][$i]['maxLength'] = $mask;
+                        $roas['roas'][$i]['maxLength'] = $maxLength;
                         $roas['roas'][$i]['ta'] = $ta;
                         $i++;
                     }
