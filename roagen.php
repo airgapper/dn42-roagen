@@ -239,6 +239,7 @@ $json = json_encode ($roas, JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT);
 
 // Write JSON to file
 $fp = fopen ('roa/export_dn42.json', 'w');
+fwrite ($fp, shell_exec ("/usr/bin/git -C ../registry/ show | sed 's/^/\/\/ /g'"));
 fwrite ($fp, $json);
 fclose ($fp);
 
@@ -246,6 +247,10 @@ fclose ($fp);
 $fq = fopen ('roa/bird_roa_dn42.conf', 'w');
 $fq4 = fopen ('roa/bird4_roa_dn42.conf', 'w');
 $fq6 = fopen ('roa/bird6_roa_dn42.conf', 'w');
+
+fwrite ($fq, shell_exec ("/usr/bin/git -C ../registry/ show | sed 's/^/# /g'"));
+fwrite ($fq4, shell_exec ("/usr/bin/git -C ../registry/ show | sed 's/^/# /g'"));
+fwrite ($fq6, shell_exec ("/usr/bin/git -C ../registry/ show | sed 's/^/# /g'"));
 
 foreach ($roas["roas"] as $roa)
 {
