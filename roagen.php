@@ -238,9 +238,34 @@ foreach ($raw_array as $sub_array)
 $json = json_encode ($roas, JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT);
 
 // Write JSON to file
-$fp = fopen ('dn42-rpki-export.json', 'w');
+$fp = fopen ('roa/export_dn42.json', 'w');
 fwrite ($fp, $json);
 fclose ($fp);
+
+// Write TEXT to file in bird format
+$fq = fopen ('roa/bird_roa_dn42.conf', 'w');
+$fr = fopen ('roa/bird4_roa_dn42.conf', 'w');
+$fs = fopen ('roa/bird6_roa_dn42.conf', 'w');
+
+foreach ($roas["roas"] as $roa)
+{
+  $prfx = $roa["prefix"];
+  $mxLngth = $roa["maxLength"];
+  $sn = $roa["asn"];
+
+  $strng = "roa $prfx max $mxLngth as $sn;\n";
+
+  fwrite ($fq, $strng);
+  
+  if (strpos ($prfx, ":") !== false)
+    fwrite ($fr, $strng);
+  else
+    fwrite ($fs, $strng);
+}
+
+fclose ($fq);
+fclose ($fr);
+fclose ($fs);
 
 // Commit and push to all git remote repositories
 echo shell_exec ("./update.sh 2>&1");
