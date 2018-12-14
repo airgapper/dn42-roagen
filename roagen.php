@@ -244,8 +244,8 @@ fclose ($fp);
 
 // Write TEXT to file in bird format
 $fq = fopen ('roa/bird_roa_dn42.conf', 'w');
-$fr = fopen ('roa/bird4_roa_dn42.conf', 'w');
-$fs = fopen ('roa/bird6_roa_dn42.conf', 'w');
+$fq4 = fopen ('roa/bird4_roa_dn42.conf', 'w');
+$fq6 = fopen ('roa/bird6_roa_dn42.conf', 'w');
 
 foreach ($roas["roas"] as $roa)
 {
@@ -258,14 +258,14 @@ foreach ($roas["roas"] as $roa)
   fwrite ($fq, $strng);
   
   if (strpos ($prfx, ":") !== false)
-    fwrite ($fr, $strng);
+    fwrite ($fq6, $strng);
   else
-    fwrite ($fs, $strng);
+    fwrite ($fq4, $strng);
 }
 
 fclose ($fq);
-fclose ($fr);
-fclose ($fs);
+fclose ($fq4);
+fclose ($fq6);
 
 // Commit and push to all git remote repositories
 echo shell_exec ("./update.sh 2>&1");
