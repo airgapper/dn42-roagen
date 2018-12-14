@@ -48,6 +48,9 @@ function trim_special_chars ($string)
 // Define array() we are going to populate with data.
 $roas = array();
 $roas["slurmVersion"] = 1;
+$roas["validationOutputFilters"]["prefixFilters"] = array();
+$roas["validationOutputFilters"]["bgpsecFilters"] = array(); 
+$roas["locallyAddedAssertions"]["bgpsecAssertions"] = array();
 
 // Set folders we need to scan.
 $files6 = scandir("../registry/data/route6/");
