@@ -86,10 +86,11 @@ foreach ($files6 as $file)
   {
     $str = trim_special_chars ($str);
     
-    if     (startsWith ($str, ("max"),    3))      $raw_array[$i]["max"]        = $str;
-    elseif (startsWith ($str, ("source"), 6))      $raw_array[$i]["source"]     = $str;
-    elseif (startsWith ($str, ("route"),  5))      $raw_array[$i]["route"]      = $str;
-    elseif (startsWith ($str, ("origin"), 6))      $raw_array[$i]["asn"][$j++]  = $str;
+    if     (startsWith ($str, "max",    3)) $raw_array[$i]["max"]       = $str;
+    elseif (startsWith ($str, "source", 6)) $raw_array[$i]["source"]    = $str;
+    elseif (startsWith ($str, "route",  5)) $raw_array[$i]["route"]     = $str;
+    elseif (startsWith ($str, "origin", 6)) $raw_array[$i]["asn"][$j++] = $str;
+    elseif (startsWith ($str, "mnt",    3)) $raw_array[$i]["mnt"]       = $str;
     
     // Catch max-length not set in route object.
     if (empty ($raw_array[$i]["max"])) $raw_array[$i]["max"] = -1;
@@ -104,26 +105,33 @@ foreach ($raw_array as $sub_array)
   // Extract prefix and subnet size
   // Match prefix sizes 29-64, 80.
   $prefix = array();
-  preg_match("/([a-f0-9\:]{0,128})\/(29|[3-5][0-9]|6[0-4]|80)/",
-   explode("6: ", $sub_array["route"])[1],
+  preg_match ("/([a-f0-9\:]{0,128})\/(29|[3-5][0-9]|6[0-4]|80)/",
+   explode ("6: ", $sub_array["route"])[1],
    $prefix);
   
   // Extract ta information
   $source = array();
   preg_match ("/([A-Z0-4]+)/",
-   explode(":", $sub_array["source"])[1],
+   explode (":", $sub_array["source"])[1],
    $source);
   
   // Try to extract max-length information
   $maxlength = array();
   if (($sub_array["max"]) != -1)
     preg_match ("/([0-9]+)/",
-     explode(":", $sub_array["max"])[1],
+     explode (":", $sub_array["max"])[1],
      $maxlength);
 
+  // Extract mnt-by information
+  $mnt = array();
+  preg_match ("/([A-Z0-9\-]+)/",
+   explode (":", $sub_array["mnt"])[1],
+   $mnt);
+
   // Store extracted values
-  $_prefix    = $prefix[0];
-  $_ta        = (isset ($source[0]) ? $source[0] : "");
+  $_prefix = $prefix[0];
+  $_ta = (isset ($source[0]) ? $source[0] : "");
+
   // We need to do conditional setting of maxLength to avoid errornous output.
   if (($sub_array["max"]) != -1)
     $_maxlength = (isset ($maxlength[0]) ? $maxlength[0] : "");
@@ -131,6 +139,8 @@ foreach ($raw_array as $sub_array)
     // Do fallback to default prefix size if max-length was not set.
     $_maxlength = $prefix[2];
   
+  $_mnt = $mnt[0];
+
   // Loop through each asn in single route6 object and assign
   // other values accordingly.
   foreach ($sub_array["asn"] as $asn)
@@ -141,8 +151,8 @@ foreach ($raw_array as $sub_array)
     $roas["locallyAddedAssertions"]["prefixAssertions"][$k]["asn"] = $_asn[0];
     $roas["locallyAddedAssertions"]["prefixAssertions"][$k]["prefix"] = $_prefix;
     $roas["locallyAddedAssertions"]["prefixAssertions"][$k]["maxPrefixLength"] = $_maxlength;
-    $roas["locallyAddedAssertions"]["prefixAssertions"][$k]["comment"] = $_ta;
-    
+    $roas["locallyAddedAssertions"]["prefixAssertions"][$k]["comment"] = "$_ta - mnt-by $_mnt";
+
     $k++;
   }
 }
@@ -177,11 +187,12 @@ foreach ($files4 as $file)
   {
     $str = trim_special_chars ($str);
     
-    if     (startsWith ($str, ("max"),    3))      $raw_array[$i]["max"]        = $str;
-    elseif (startsWith ($str, ("source"), 6))      $raw_array[$i]["source"]     = $str;
-    elseif (startsWith ($str, ("route"),  5))      $raw_array[$i]["route"]      = $str;
-    elseif (startsWith ($str, ("origin"), 6))      $raw_array[$i]["asn"][$j++]  = $str;
-    
+    if     (startsWith ($str, "max",    3)) $raw_array[$i]["max"]       = $str;
+    elseif (startsWith ($str, "source", 6)) $raw_array[$i]["source"]    = $str;
+    elseif (startsWith ($str, "route",  5)) $raw_array[$i]["route"]     = $str;
+    elseif (startsWith ($str, "origin", 6)) $raw_array[$i]["asn"][$j++] = $str;
+    elseif (startsWith ($str, "mnt",    3)) $raw_array[$i]["mnt"]       = $str;
+
     // Catch max-length not set in route object.
     if (empty ($raw_array[$i]["max"])) $raw_array[$i]["max"] = -1;
   }
@@ -193,32 +204,41 @@ foreach ($raw_array as $sub_array)
   // Extract prefix and subnet size
   // Match prefix sizes 8-32.
   $prefix = array();
-  preg_match("/([0-9\.]{7,15})\/([8-9]|[1-2][0-9]|3[0-2])/",
-   explode(":", $sub_array["route"])[1],
+  preg_match ("/([0-9\.]{7,15})\/([8-9]|[1-2][0-9]|3[0-2])/",
+   explode (":", $sub_array["route"])[1],
    $prefix);
   
   // Extract ta information
   $source = array();
   preg_match ("/([A-Z0-4]+)/",
-   explode(":", $sub_array["source"])[1],
+   explode (":", $sub_array["source"])[1],
    $source);
   
   // Try to extract max-length information
   $maxlength = array();
   if (($sub_array["max"]) != -1)
     preg_match ("/([0-9]+)/",
-     explode(":", $sub_array["max"])[1],
+     explode (":", $sub_array["max"])[1],
      $maxlength);
 
+  // Extract mnt-by information
+  $mnt = array();
+  preg_match ("/([A-Z0-9\-]+)/",
+   explode (":", $sub_array["mnt"])[1],
+   $mnt);
+
   // Store extracted values
-  $_prefix    = $prefix[0];
-  $_ta        = (isset ($source[0]) ? $source[0] : "");
+  $_prefix = $prefix[0];
+  $_ta = (isset ($source[0]) ? $source[0] : "");
+
   // We need to do conditional setting of maxLength to avoid errornous output.
   if (($sub_array["max"]) != -1)
     $_maxlength = (isset ($maxlength[0]) ? $maxlength[0] : "");
   else
     // Do fallback to default prefix size if max-length was not set.
     $_maxlength = $prefix[2];
+
+  $_mnt = $mnt[0];
   
   // Loop through each asn in single route6 object and assign
   // other values accordingly.
@@ -230,8 +250,8 @@ foreach ($raw_array as $sub_array)
     $roas["locallyAddedAssertions"]["prefixAssertions"][$k]["asn"] = $_asn[0];
     $roas["locallyAddedAssertions"]["prefixAssertions"][$k]["prefix"] = $_prefix;
     $roas["locallyAddedAssertions"]["prefixAssertions"][$k]["maxPrefixLength"] = $_maxlength;
-    $roas["locallyAddedAssertions"]["prefixAssertions"][$k]["comment"] = $_ta;
-    
+    $roas["locallyAddedAssertions"]["prefixAssertions"][$k]["comment"] = "$_ta - mnt-by $_mnt";
+
     $k++;
   }
 }
