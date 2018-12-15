@@ -260,7 +260,7 @@ foreach ($raw_array as $sub_array)
 $json = json_encode($roas, JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT);
 
 // Write JSON to file
-$fp = fopen('dn42-rfc8416-export.json', 'w');
+$fp = fopen('roa/export_rfc8416_dn42.json', 'w');
 fwrite($fp, $json);
 fclose($fp);
 
