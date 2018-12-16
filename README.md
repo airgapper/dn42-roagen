@@ -9,7 +9,7 @@ This repository is for testing purpose before deploying code into [master reposi
 3. `cd ~/dn42/`.
 4. `git clone https://git.dn42.us/netravnen/dn42-rpki-export.json-test.git`.
 5. `git clone https://git.dn42.us/dn42/registry.git`.
-6. Verify everything work by running `cd ~/dn42/dn42-rpki-export.json-test/ && php roagen.php`.
-7. In $USER crontab file put `44 */3 * * * cd ~/dn42/dn42-rpki-export.json-test/ && php roagen.php`. Finetune time between runs to your liking.
+6. Verify everything work by running `cd ~/dn42/dn42-rpki-export.json-test/ && php roagen.php && php rfc8416.php`.
+7. In $USER crontab file put `44 */3 * * * cd ~/dn42/dn42-rpki-export.json-test/ && php roagen.php && php rfc8416.php`. Finetune time between runs to your liking.
 
 NB: The roagen.php script is written with the paths to the dn42 registry folder being both git repositories reside in the same parent folder.
