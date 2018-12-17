@@ -7,4 +7,4 @@ git add roa/*
 git commit roa/* -m "Updated ROA files - $ISO_DATE"
 
 # Push repository to every remote configured
-for REMOTE in $(git remote | paste -sd " " -) ; do git push $REMOTE master ; done
+for REMOTE in $(git remote | egrep -v upstream | paste -sd " " -) ; do git push $REMOTE master:master ; done
