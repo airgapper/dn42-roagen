@@ -283,7 +283,7 @@ foreach ($raw_array as $sub_array)
 }
 
 // Do JSON encoding before writing result to file
-$json = json_encode($roas, JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT);
+$json = json_encode($roas, JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT|JSON_NUMERIC_CHECK);
 
 // Write JSON to file
 $fp = fopen('roa/export_rfc8416_dn42.json', 'w');
