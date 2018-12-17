@@ -1,7 +1,7 @@
 <?php
 
 // Before we begin. Ensure registry repository is up-to-date
-echo shell_exec ("/usr/bin/git -C ../registry/ pull origin master:master 2>&1");
+echo shell_exec ("/usr/bin/git -C ../registry/ pull upstream master:master 2>&1");
 
 /*
  * Function:
