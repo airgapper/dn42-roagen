@@ -148,10 +148,15 @@ foreach ($raw_array as $sub_array)
     // Extract ASxxxxx from string.
     preg_match ("/AS[0-9]+/", explode (":", $asn)[1], $_asn);
     
-    $roas["locallyAddedAssertions"]["prefixAssertions"][$k]["asn"] = $_asn[0];
+    $roas["locallyAddedAssertions"]["prefixAssertions"][$k]["asn"] = trim ($_asn[0], "AS");
     $roas["locallyAddedAssertions"]["prefixAssertions"][$k]["prefix"] = $_prefix;
     $roas["locallyAddedAssertions"]["prefixAssertions"][$k]["maxPrefixLength"] = $_maxlength;
     $roas["locallyAddedAssertions"]["prefixAssertions"][$k]["comment"] = "$_ta - mnt-by $_mnt";
+
+    $roas["locallyAddedAssertions"]["bgpsecAssertions"][$k]["asn"] = trim ($_asn[0], "AS");
+    $roas["locallyAddedAssertions"]["bgpsecAssertions"][$k]["comment"] = "$_ta - mnt-by $_mnt";
+    $roas["locallyAddedAssertions"]["bgpsecAssertions"][$k]["SKI"] = "<some base64 SKI>";
+    $roas["locallyAddedAssertions"]["bgpsecAssertions"][$k]["routerPublicKey"] = "<some base64 public key>";
 
     $k++;
   }
@@ -247,10 +252,15 @@ foreach ($raw_array as $sub_array)
     // Extract ASxxxxx from string.
     preg_match ("/AS[0-9]+/", explode (":", $asn)[1], $_asn);
     
-    $roas["locallyAddedAssertions"]["prefixAssertions"][$k]["asn"] = $_asn[0];
+    $roas["locallyAddedAssertions"]["prefixAssertions"][$k]["asn"] = trim ($_asn[0], "AS");
     $roas["locallyAddedAssertions"]["prefixAssertions"][$k]["prefix"] = $_prefix;
     $roas["locallyAddedAssertions"]["prefixAssertions"][$k]["maxPrefixLength"] = $_maxlength;
     $roas["locallyAddedAssertions"]["prefixAssertions"][$k]["comment"] = "$_ta - mnt-by $_mnt";
+
+    $roas["locallyAddedAssertions"]["bgpsecAssertions"][$k]["asn"] = trim ($_asn[0], "AS");
+    $roas["locallyAddedAssertions"]["bgpsecAssertions"][$k]["comment"] = "$_ta - mnt-by $_mnt";
+    $roas["locallyAddedAssertions"]["bgpsecAssertions"][$k]["SKI"] = "<some base64 SKI>";
+    $roas["locallyAddedAssertions"]["bgpsecAssertions"][$k]["routerPublicKey"] = "<some base64 public key>";
 
     $k++;
   }
