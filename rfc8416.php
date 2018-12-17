@@ -158,6 +158,14 @@ foreach ($raw_array as $sub_array)
     $roas["locallyAddedAssertions"]["bgpsecAssertions"][$k]["SKI"] = "<some base64 SKI>";
     $roas["locallyAddedAssertions"]["bgpsecAssertions"][$k]["routerPublicKey"] = "<some base64 public key>";
 
+    $roas["validationOutputFilters"]["bgpsecFilters"][$k]["asn"] = trim ($_asn[0], "AS");
+    $roas["validationOutputFilters"]["bgpsecFilters"][$k]["SKI"] = "Zm9v";
+    $roas["validationOutputFilters"]["bgpsecFilters"][$k]["comment"] = "$_ta - mnt-by $_mnt";
+
+    $roas["validationOutputFilters"]["prefixFilters"][$k]["prefix"] = $_prefix;
+    $roas["validationOutputFilters"]["prefixFilters"][$k]["asn"] = trim ($_asn[0], "AS");
+    $roas["validationOutputFilters"]["prefixFilters"][$k]["comment"] = "$_ta - mnt-by $_mnt";
+
     $k++;
   }
 }
@@ -261,6 +269,14 @@ foreach ($raw_array as $sub_array)
     $roas["locallyAddedAssertions"]["bgpsecAssertions"][$k]["comment"] = "$_ta - mnt-by $_mnt";
     $roas["locallyAddedAssertions"]["bgpsecAssertions"][$k]["SKI"] = "<some base64 SKI>";
     $roas["locallyAddedAssertions"]["bgpsecAssertions"][$k]["routerPublicKey"] = "<some base64 public key>";
+
+    $roas["validationOutputFilters"]["bgpsecFilters"][$k]["asn"] = trim ($_asn[0], "AS");
+    $roas["validationOutputFilters"]["bgpsecFilters"][$k]["SKI"] = "Zm9v";               
+    $roas["validationOutputFilters"]["bgpsecFilters"][$k]["comment"] = "$_ta - mnt-by $_mnt";
+
+    $roas["validationOutputFilters"]["prefixFilters"][$k]["prefix"] = $_prefix;
+    $roas["validationOutputFilters"]["prefixFilters"][$k]["asn"] = trim ($_asn[0], "AS");
+    $roas["validationOutputFilters"]["prefixFilters"][$k]["comment"] = "$_ta - mnt-by $_mnt";
 
     $k++;
   }
