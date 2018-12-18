@@ -214,10 +214,7 @@ foreach ($raw_array as $sub_array)
   }
 }
 
-// Do JSON encoding before writing result to file
-$json = json_encode($roas, JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT|JSON_NUMERIC_CHECK);
-
-writeRoutinatorExceptionFile($json);
+writeRoutinatorExceptionFile($roas);
 
 commitPushToRemotes();
 

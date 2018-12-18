@@ -75,8 +75,10 @@ function commitPushToRemotes ()
   echo shell_exec ("./update.sh 2>&1");
 }
 
-function writeBirdConfig ($json, $roas)
+function writeBirdConfig ($roas)
 {
+  $json = json_encode($roas, JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT);
+
   $fq = fopen ('roa/bird_roa_dn42.conf', 'w');
   $fq4 = fopen ('roa/bird4_roa_dn42.conf', 'w');
   $fq6 = fopen ('roa/bird6_roa_dn42.conf', 'w');
@@ -106,8 +108,10 @@ function writeBirdConfig ($json, $roas)
   fclose ($fq6);
 }
 
-function writeRoutinatorExceptionFile ($json)
+function writeRoutinatorExceptionFile ($roas)
 {
+  $json = json_encode($roas, JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT|JSON_NUMERIC_CHECK);
+
   $fp = fopen('roa/export_rfc8416_dn42.json', 'w');
 
   fwrite($fp, $json);
@@ -115,8 +119,10 @@ function writeRoutinatorExceptionFile ($json)
   fclose($fp);
 }
 
-function writeExportJSON ($json)
+function writeExportJSON ($roas)
 {
+  $json = json_encode($roas, JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT);
+
   $fp = fopen ('roa/export_dn42.json', 'w');
 
   fwrite ($fp, shell_exec ("/usr/bin/git -C ../registry/ show | sed 's/^/\/\/ /g'"));

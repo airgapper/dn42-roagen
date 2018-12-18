@@ -189,11 +189,8 @@ foreach ($raw_array as $sub_array)
   }
 }
 
-// Do JSON encoding before writing result to file
-$json = json_encode ($roas, JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT);
-
-writeExportJSON($json);
-writeBirdConfig($json, $roas);
+writeExportJSON($roas);
+writeBirdConfig($roas);
 
 commitPushToRemotes();
 
