@@ -1,5 +1,8 @@
 <?php
 
+require ("_define.php");
+require ("_functions.php");
+
 // Before we begin. Ensure registry repository is up-to-date
 fetchUpstreamMaster();
 checkoutMaster();
@@ -189,8 +192,8 @@ foreach ($raw_array as $sub_array)
 // Do JSON encoding before writing result to file
 $json = json_encode ($roas, JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT);
 
-writeExportJSON();
-writeBirdConfig();
+writeExportJSON($json);
+writeBirdConfig($json, $roas);
 
 commitPushToRemotes();
 
