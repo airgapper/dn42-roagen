@@ -4,7 +4,7 @@
  * Function:
  * fetchUpstreamMaster ()
  *
- *Ensure registry repository master branch is up-to-date.
+ * Ensure registry repository master branch is up-to-date.
  */
 function fetchUpstreamMaster ()
 {
@@ -77,6 +77,10 @@ function commitPushToRemotes ()
 
 function writeBirdConfig ()
 {
+  $fq = fopen ('roa/bird_roa_dn42.conf', 'w');
+  $fq4 = fopen ('roa/bird4_roa_dn42.conf', 'w');
+  $fq6 = fopen ('roa/bird6_roa_dn42.conf', 'w');
+
   fwrite ($fq, shell_exec ("/usr/bin/git -C ../registry/ show | sed 's/^/# /g'"));
   fwrite ($fq4, shell_exec ("/usr/bin/git -C ../registry/ show | sed 's/^/# /g'"));
   fwrite ($fq6, shell_exec ("/usr/bin/git -C ../registry/ show | sed 's/^/# /g'"));
