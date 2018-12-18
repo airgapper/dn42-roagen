@@ -1,60 +1,18 @@
 <?php
 
+// Load lib files.
+require ("_define.php");
+require ("_functions.php");
+
 // Before we begin. Ensure registry repository is up-to-date
-echo shell_exec("/usr/bin/git -C ../registry/ pull origin master:master 2>&1");
-
-/*
- * Function:
- * startsWith ($string, "word", $length)
- * 
- * Find lines beginning with "word". Optionally
- * give the length of the string you are looking for.
- */
-function startsWith ($haystack, $needle, $length = "0")
-{
-  if ($length <= 0 || $length > (strlen ($needle)))
-    $length = strlen ($needle);
-
-  return (substr ($haystack, 0, $length) === $needle);
-}
-
-/*
- * Function:
- * endsWith ($string, "word") 
- *   
- * Find lines ending with "word".
- */
-function endsWith ($haystack, $needle)
-{
-  $length = strlen ($needle);
-
-  if ($length == 0)
-    return true;
-
-  return (substr( $haystack, -$length) === $needle);
-}
-
-/*
- * Function:
- * trim_special_chars ($string) 
- *   
- * Remove special characters.
- */
-function trim_special_chars ($string)
-{
-  return (trim ($string, " \t\n\r\0\x0B"));
-}
+fetchUpstreamMaster();
+checkoutMaster();
 
 // Define array() we are going to populate with data.
-$roas = array();
 $roas["slurmVersion"] = 1;
 $roas["validationOutputFilters"]["prefixFilters"] = array();
 $roas["validationOutputFilters"]["bgpsecFilters"] = array(); 
 $roas["locallyAddedAssertions"]["bgpsecAssertions"] = array();
-
-// Set folders we need to scan.
-$files6 = scandir("../registry/data/route6/");
-$files4 = scandir("../registry/data/route/");
 
 /*
  *
@@ -152,19 +110,6 @@ foreach ($raw_array as $sub_array)
     $roas["locallyAddedAssertions"]["prefixAssertions"][$k]["prefix"] = $_prefix;
     $roas["locallyAddedAssertions"]["prefixAssertions"][$k]["maxPrefixLength"] = $_maxlength;
     $roas["locallyAddedAssertions"]["prefixAssertions"][$k]["comment"] = "$_ta - mnt-by $_mnt";
-
-    $roas["locallyAddedAssertions"]["bgpsecAssertions"][$k]["asn"] = trim ($_asn[0], "AS");
-    $roas["locallyAddedAssertions"]["bgpsecAssertions"][$k]["comment"] = "$_ta - mnt-by $_mnt";
-    $roas["locallyAddedAssertions"]["bgpsecAssertions"][$k]["SKI"] = "<some base64 SKI>";
-    $roas["locallyAddedAssertions"]["bgpsecAssertions"][$k]["routerPublicKey"] = "<some base64 public key>";
-
-    $roas["validationOutputFilters"]["bgpsecFilters"][$k]["asn"] = trim ($_asn[0], "AS");
-    $roas["validationOutputFilters"]["bgpsecFilters"][$k]["SKI"] = "Zm9v";
-    $roas["validationOutputFilters"]["bgpsecFilters"][$k]["comment"] = "$_ta - mnt-by $_mnt";
-
-    $roas["validationOutputFilters"]["prefixFilters"][$k]["prefix"] = $_prefix;
-    $roas["validationOutputFilters"]["prefixFilters"][$k]["asn"] = trim ($_asn[0], "AS");
-    $roas["validationOutputFilters"]["prefixFilters"][$k]["comment"] = "$_ta - mnt-by $_mnt";
 
     $k++;
   }
@@ -265,19 +210,6 @@ foreach ($raw_array as $sub_array)
     $roas["locallyAddedAssertions"]["prefixAssertions"][$k]["maxPrefixLength"] = $_maxlength;
     $roas["locallyAddedAssertions"]["prefixAssertions"][$k]["comment"] = "$_ta - mnt-by $_mnt";
 
-    $roas["locallyAddedAssertions"]["bgpsecAssertions"][$k]["asn"] = trim ($_asn[0], "AS");
-    $roas["locallyAddedAssertions"]["bgpsecAssertions"][$k]["comment"] = "$_ta - mnt-by $_mnt";
-    $roas["locallyAddedAssertions"]["bgpsecAssertions"][$k]["SKI"] = "<some base64 SKI>";
-    $roas["locallyAddedAssertions"]["bgpsecAssertions"][$k]["routerPublicKey"] = "<some base64 public key>";
-
-    $roas["validationOutputFilters"]["bgpsecFilters"][$k]["asn"] = trim ($_asn[0], "AS");
-    $roas["validationOutputFilters"]["bgpsecFilters"][$k]["SKI"] = "Zm9v";               
-    $roas["validationOutputFilters"]["bgpsecFilters"][$k]["comment"] = "$_ta - mnt-by $_mnt";
-
-    $roas["validationOutputFilters"]["prefixFilters"][$k]["prefix"] = $_prefix;
-    $roas["validationOutputFilters"]["prefixFilters"][$k]["asn"] = trim ($_asn[0], "AS");
-    $roas["validationOutputFilters"]["prefixFilters"][$k]["comment"] = "$_ta - mnt-by $_mnt";
-
     $k++;
   }
 }
@@ -285,12 +217,9 @@ foreach ($raw_array as $sub_array)
 // Do JSON encoding before writing result to file
 $json = json_encode($roas, JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT|JSON_NUMERIC_CHECK);
 
-// Write JSON to file
-$fp = fopen('roa/export_rfc8416_dn42.json', 'w');
-fwrite($fp, $json);
-fclose($fp);
+writeRoutinatorExceptionFile();
 
 // Commit and push to all git remote repositories
-echo shell_exec("./update.sh 2>&1");
+commitPushToRemotes();
 
 ?>
