@@ -46,7 +46,7 @@ foreach ($files6 as $file)
     
     if     (startsWith ($str, "max",    3)) $raw_array[$i]["max"]       = $str;
     elseif (startsWith ($str, "source", 6)) $raw_array[$i]["source"]    = $str;
-    elseif (startsWith ($str, "route",  5)) $raw_array[$i]["route"]     = $str;
+    elseif (startsWith ($str, "route6", 6)) $raw_array[$i]["route"]     = $str;
     elseif (startsWith ($str, "origin", 6)) $raw_array[$i]["asn"][$j++] = $str;
     elseif (startsWith ($str, "mnt",    3)) $raw_array[$i]["mnt"]       = $str;
     
