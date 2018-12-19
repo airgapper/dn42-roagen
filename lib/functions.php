@@ -8,7 +8,7 @@
  */
 function fetchUpstreamMaster ()
 {
-  echo shell_exec ("/usr/bin/git -C ../registry/ pull upstream master:master 2>&1");
+  echo shell_exec ("/usr/bin/git -C ../registry/ pull upstream master:master --quiet 2>&1");
 }
 
 /*
@@ -19,7 +19,7 @@ function fetchUpstreamMaster ()
  */
 function checkoutMaster ()  
 {
-  echo shell_exec ("/usr/bin/git -C ../registry/ o master 2>&1");
+  echo shell_exec ("/usr/bin/git -C ../registry/ o master --quiet 2>&1");
 }
 
 /*
