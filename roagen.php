@@ -1,7 +1,7 @@
 <?php
 
-require ("_define.php");
-require ("_functions.php");
+require ("lib/define.php");
+require ("lib/functions.php");
 
 // Before we begin. Ensure registry repository is up-to-date
 fetchUpstreamMaster();
