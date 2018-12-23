@@ -17,8 +17,7 @@ echo "## Last commit
 
 \`\`\`
 $(git -C ../registry/ show)
-\`\`\`
-" | tee roa/README.md
+\`\`\`" > roa/README.md
 
 # Commit latest version of ROA files
 git add roa/*
