@@ -77,7 +77,7 @@ foreach ($raw_array as $sub_array)
     $_maxlength = (isset ($maxlength[0]) ? $maxlength[0] : "");
   else
     // Do fallback to default prefix size if max-length was not set.
-    $_maxlength = $prefix[2];
+    $_maxlength = ($prefix[2] < 64 ? 64 : $prefix[2]);
 
   // Loop through each asn in single route6 object and assign
   // other values accordingly.
@@ -167,7 +167,7 @@ foreach ($raw_array as $sub_array)
     $_maxlength = (isset ($maxlength[0]) ? $maxlength[0] : "");
   else
     // Do fallback to default prefix size if max-length was not set.
-    $_maxlength = $prefix[2];
+    $_maxlength = ($prefix[2] < 29 ? 29 : $prefix[2]);
 
   // Loop through each asn in single route6 object and assign
   // other values accordingly.
