@@ -3,10 +3,6 @@
 require ("lib/define.php");
 require ("lib/functions.php");
 
-// Before we begin. Ensure registry repository is up-to-date
-fetchUpstreamMaster();
-checkoutMaster();
-
 /*
  *
  * IPv6
@@ -191,7 +187,5 @@ foreach ($raw_array as $sub_array)
 
 writeExportJSON($roas);
 writeBirdConfig($roas);
-
-commitPushToRemotes();
 
 ?>

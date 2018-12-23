@@ -53,17 +53,6 @@ function trim_special_chars ($string)
   return (trim ($string, " \t\n\r\0\x0B"));
 }
 
-/*
- * Function:
- * pushToRemotes ()
- *
- * Commit and push to all git remote repositories.
- */
-function commitPushToRemotes ()
-{
-  echo shell_exec ("./update.sh 2>&1");
-}
-
 function writeBirdConfig ($roas)
 {
   $json = json_encode($roas, JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT);

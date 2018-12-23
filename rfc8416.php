@@ -4,10 +4,6 @@
 require ("lib/define.php");
 require ("lib/functions.php");
 
-// Before we begin. Ensure registry repository is up-to-date
-fetchUpstreamMaster();
-checkoutMaster();
-
 // Define array() we are going to populate with data.
 $roas["slurmVersion"] = 1;
 $roas["validationOutputFilters"]["prefixFilters"] = array();
@@ -215,7 +211,5 @@ foreach ($raw_array as $sub_array)
 }
 
 writeRoutinatorExceptionFile($roas);
-
-commitPushToRemotes();
 
 ?>
