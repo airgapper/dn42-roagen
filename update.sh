@@ -3,7 +3,7 @@
 ISO_DATE=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
 
 # Ensure registry repository is up-to-date
-git -C ../registry/ pull origin master:master --quiet 2>&1
+git -C ../registry/ pull upstream master:master --quiet 2>&1
 
 # Checkout master branch in dn42/repository
 git -C ../registry/ checkout master --quiet
