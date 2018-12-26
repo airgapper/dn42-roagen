@@ -91,7 +91,7 @@ foreach ($raw_array as $sub_array)
     $_maxlength = (isset ($maxlength[0]) ? $maxlength[0] : "");
   else
     // Do fallback to default prefix size if max-length was not set.
-    $_maxlength = ($prefix[2] < 64 ? 64 : $prefix[2]);
+    $_maxlength = ($prefix[2] < MAX_LEN_IPV6 ? MAX_LEN_IPV6 : $prefix[2]);
   
   $_mnt = $mnt[0];
 
@@ -190,7 +190,7 @@ foreach ($raw_array as $sub_array)
     $_maxlength = (isset ($maxlength[0]) ? $maxlength[0] : "");
   else
     // Do fallback to default prefix size if max-length was not set.
-    $_maxlength = ($prefix[2] < 29 ? 29 : $prefix[2]);
+    $_maxlength = ($prefix[2] < MAX_LEN_IPV4 ? MAX_LEN_IPV4 : $prefix[2]);
 
   $_mnt = $mnt[0];
   
