@@ -16,7 +16,7 @@ php rfc8416.php
 echo "## Last commit
 
 \`\`\`
-$(git -C ../registry/ show)
+$(git -C ../registry/ log -n 1)
 \`\`\`" > roa/README.md
 
 # Commit latest version of ROA files
