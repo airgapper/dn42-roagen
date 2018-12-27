@@ -110,7 +110,9 @@ foreach ($raw_array as $sub_array)
     $roas["locallyAddedAssertions"]["prefixAssertions"][$k]["asn"] = trim ($_asn[0], "AS");
     $roas["locallyAddedAssertions"]["prefixAssertions"][$k]["prefix"] = $_prefix;
     $roas["locallyAddedAssertions"]["prefixAssertions"][$k]["maxPrefixLength"] = $_maxlength;
-    $roas["locallyAddedAssertions"]["prefixAssertions"][$k]["comment"] = "$_ta - mnt-by $_mnt";
+    $roas["locallyAddedAssertions"]["prefixAssertions"][$k]["comment"] = "$web_registry_url/data/inet6num/$prefix[1]_$prefix[2]";
+    $roas["locallyAddedAssertions"]["prefixAssertions"][$k]["source"] = "$_ta";
+    $roas["locallyAddedAssertions"]["prefixAssertions"][$k]["mnt-by"] = "$_mnt";
 
     $k++;
   }
@@ -209,7 +211,9 @@ foreach ($raw_array as $sub_array)
     $roas["locallyAddedAssertions"]["prefixAssertions"][$k]["asn"] = trim ($_asn[0], "AS");
     $roas["locallyAddedAssertions"]["prefixAssertions"][$k]["prefix"] = $_prefix;
     $roas["locallyAddedAssertions"]["prefixAssertions"][$k]["maxPrefixLength"] = $_maxlength;
-    $roas["locallyAddedAssertions"]["prefixAssertions"][$k]["comment"] = "$_ta - mnt-by $_mnt";
+    $roas["locallyAddedAssertions"]["prefixAssertions"][$k]["comment"] = "$web_registry_url/data/inetnum/$prefix[1]_$prefix[2]";
+    $roas["locallyAddedAssertions"]["prefixAssertions"][$k]["source"] = "$_ta";
+    $roas["locallyAddedAssertions"]["prefixAssertions"][$k]["mnt-by"] = "$_mnt";
 
     $k++;
   }
