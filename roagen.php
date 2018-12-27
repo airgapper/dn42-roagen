@@ -3,6 +3,13 @@
 require ("lib/define.php");
 require ("lib/functions.php");
 
+// Define array() we are going to populate with data.
+$roas["_comments"]["modified"]["commit"] = shell_exec ("/usr/bin/git -C ../registry/ log -n 1 --pretty='format:%H'");
+$roas["_comments"]["modified"]["merge"] = shell_exec ("/usr/bin/git -C ../registry/ log -n 1 --pretty='format:%p'");
+$roas["_comments"]["modified"]["author"] = shell_exec ("/usr/bin/git -C ../registry/ log -n 1 --pretty='format:%an <%ae>'");
+$roas["_comments"]["modified"]["date"] = shell_exec ("/usr/bin/git -C ../registry/ log -n 1 --pretty='format:%aD'");
+$roas["_comments"]["modified"]["subject"] = shell_exec ("/usr/bin/git -C ../registry/ log -n 1 --pretty='format:%s'");
+
 /*
  *
  * IPv6

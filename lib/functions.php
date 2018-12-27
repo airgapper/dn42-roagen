@@ -92,9 +92,6 @@ function writeRoutinatorExceptionFile ($roas)
 
   $fp = fopen('roa/export_rfc8416_dn42.json', 'w');
 
-  //fwrite ($fp, shell_exec ("/usr/bin/git -C ../registry/ show | sed 's/^/\/\/ /g'"));
-  // Removed as routinator complains about comments in JSON file :(
-
   fwrite($fp, $json);
 
   fclose($fp);
@@ -106,7 +103,6 @@ function writeExportJSON ($roas)
 
   $fp = fopen ('roa/export_dn42.json', 'w');
 
-  fwrite ($fp, shell_exec ("/usr/bin/git -C ../registry/ show | sed 's/^/\/\/ /g'"));
   fwrite ($fp, $json);
 
   fclose ($fp);
