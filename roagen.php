@@ -9,6 +9,8 @@ $roas["_comments"]["modified"]["merge"] = shell_exec ("/usr/bin/git -C ../regist
 $roas["_comments"]["modified"]["author"] = shell_exec ("/usr/bin/git -C ../registry/ log -n 1 --pretty='format:%an <%ae>'");
 $roas["_comments"]["modified"]["date"] = shell_exec ("/usr/bin/git -C ../registry/ log -n 1 --pretty='format:%aD'");
 $roas["_comments"]["modified"]["subject"] = shell_exec ("/usr/bin/git -C ../registry/ log -n 1 --pretty='format:%s'");
+$roas["_comments"]["modified"]["url"] = "https://git.dn42.us/dn42/registry/commit/";
+$roas["_comments"]["modified"]["url"] .= $roas["_comments"]["modified"]["commit"];
 
 /*
  *
