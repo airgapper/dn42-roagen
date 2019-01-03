@@ -13,7 +13,18 @@ php roagen.php
 php rfc8416.php
 
 # Write out last commit to file
-echo "## Last commit
+echo "## Notes
+
+- These files are Bird 1.x compatible:
+  - bird_roa_dn42.conf
+  - bird4_roa_dn42.conf
+  - bird6_roa_dn42.conf
+- These files are Bird 2.x compatible:
+  - bird_route_dn42.conf
+  - bird4_route_dn42.conf
+  - bird6_route_dn42.conf
+
+## Last commit
 
 \`\`\`
 $(git -C ../registry/ log -n 1)

@@ -57,13 +57,21 @@ function writeBirdConfig ($roas)
 {
   $json = json_encode($roas, JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT);
 
-  $fq = fopen ('roa/bird_roa_dn42.conf', 'w');
-  $fq4 = fopen ('roa/bird4_roa_dn42.conf', 'w');
-  $fq6 = fopen ('roa/bird6_roa_dn42.conf', 'w');
+  $bird1_fq = fopen ('roa/bird_roa_dn42.conf', 'w');
+  $bird1_fq4 = fopen ('roa/bird4_roa_dn42.conf', 'w');
+  $bird1_fq6 = fopen ('roa/bird6_roa_dn42.conf', 'w');
 
-  fwrite ($fq, shell_exec ("/usr/bin/git -C ../registry/ show | sed 's/^/# /g'"));
-  fwrite ($fq4, shell_exec ("/usr/bin/git -C ../registry/ show | sed 's/^/# /g'"));
-  fwrite ($fq6, shell_exec ("/usr/bin/git -C ../registry/ show | sed 's/^/# /g'"));
+  $bird2_fq = fopen ('roa/bird_route_dn42.conf', 'w');
+  $bird2_fq4 = fopen ('roa/bird4_route_dn42.conf', 'w');
+  $bird2_fq6 = fopen ('roa/bird6_route_dn42.conf', 'w');
+
+  fwrite ($bird1_fq, shell_exec ("/usr/bin/git -C ../registry/ show | sed 's/^/# /g'"));
+  fwrite ($bird1_fq4, shell_exec ("/usr/bin/git -C ../registry/ show | sed 's/^/# /g'"));
+  fwrite ($bird1_fq6, shell_exec ("/usr/bin/git -C ../registry/ show | sed 's/^/# /g'"));
+
+  fwrite ($bird2_fq, shell_exec ("/usr/bin/git -C ../registry/ show | sed 's/^/# /g'"));
+  fwrite ($bird2_fq4, shell_exec ("/usr/bin/git -C ../registry/ show | sed 's/^/# /g'"));
+  fwrite ($bird2_fq6, shell_exec ("/usr/bin/git -C ../registry/ show | sed 's/^/# /g'"));
 
   foreach ($roas["roas"] as $roa)
   {
@@ -71,19 +79,31 @@ function writeBirdConfig ($roas)
     $mxLngth = $roa["maxLength"];
     $sn = $roa["asn"];
 
-    $strng = "roa $prfx max $mxLngth as $sn;\n";
+    $bird1_strng = "roa $prfx max $mxLngth as $sn;\n";
+    $bird2_strng = "route $prfx max $mxLngth as $sn;\n";
 
-    fwrite ($fq, $strng);
-  
+    fwrite ($bird1_fq, $bird1_strng);
+    fwrite ($bird2_fq, $bird2_strng);
+
     if (strpos ($prfx, ":") !== false)
-      fwrite ($fq6, $strng);
+    {
+      fwrite ($bird1_fq6, $bird1_strng);
+      fwrite ($bird2_fq6, $bird2_strng);
+    }
     else
-      fwrite ($fq4, $strng);
+    {
+      fwrite ($bird1_fq4, $bird1_strng);
+      fwrite ($bird2_fq6, $bird2_strng);
+    }
   }
 
-  fclose ($fq);
-  fclose ($fq4);
-  fclose ($fq6);
+  fclose ($bird1_fq);
+  fclose ($bird1_fq4);
+  fclose ($bird1_fq6);
+
+  fclose ($bird2_fq);
+  fclose ($bird2_fq4);
+  fclose ($bird2_fq6);
 }
 
 function writeRoutinatorExceptionFile ($roas)
