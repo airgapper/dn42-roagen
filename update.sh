@@ -10,13 +10,13 @@ git -C ../registry/ checkout master --quiet
 
 # Do a git pull beforehand to ensure our repository is up-to-date
 git checkout master --quiet
-git pull origin master:master --quiet
+git pull origin master:master --quiet --rebase
 
 # Do the same for sub-repo if exists
 if [ -d roa/.git/ ] ; then
   git -C roa/ checkout master --quiet
   if [ $(git -C roa/ remote | grep origin) ] ; then
-    git -C roa/ pull origin master:master --quiet
+    git -C roa/ pull origin master:master --quiet --rebase
   fi
 fi
 
@@ -26,7 +26,7 @@ php rfc8416.php
 
 # Ensure sub-repo is created to track roa file udpates 
 if [ ! -d roa/ ] ; then mkdir roa ; fi
-if [ ! -d roa/.git/ ] ; then
+if [ ! -f roa/.git/config ] ; then
   git -C roa/ init              
   if [ ! -f roa/README.md ; then
     touch roa/README.md
