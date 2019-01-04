@@ -6,8 +6,7 @@
 2. `mkdir -p ~/dn42/`.
 3. `cd ~/dn42/`.
 4. `git clone https://git.dn42.us/netravnen/dn42-roagen.git roagen`.
-5. `git clone https://git.dn42.us/netravnen/dn42-rpki-export.json.git roagen/roa`.
-6. `git clone https://git.dn42.us/dn42/registry.git`.
+5. `git clone https://git.dn42.us/dn42/registry.git`.
 6. `git -C registry/ remote rename origin upstream && git -C registry/ fetch --all`
 7. Verify everything work by running `cd ~/dn42/roagen/ && ./update.sh`.
 8. In $USER crontab file put `44 */3 * * * cd ~/dn42/roagen/ && ./update.sh`. Finetune time between runs to your liking.
