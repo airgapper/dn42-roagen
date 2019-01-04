@@ -9,8 +9,8 @@ git -C ../registry/ pull upstream master:master --quiet 2>&1
 git -C ../registry/ checkout master --quiet
 
 # Do a git pull beforehand to ensure our repository is up-to-date
-git checkout master
-git pull origin master:master
+git checkout master --quiet
+git pull origin master:master --quiet
 
 # Do the same for sub-repo if exists
 if [ -d roa/.git/ ] ; then
