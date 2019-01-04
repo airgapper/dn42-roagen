@@ -20,7 +20,7 @@ if [ ! -d roa/.git/ ] ; then
     touch roa/README.md
     echo '## roas' | tee roa/README.md ; fi                
   git -C roa/ commit --allow-empty -m "Initial commit"
-  git -C roa/ commit roa/README.md -m "Add README.md" ; fi
+  git -C roa/ commit README.md -m "Add README.md" ; fi
 
 # Write out last commit to file
 echo "## Notes
@@ -41,8 +41,8 @@ $(git -C ../registry/ log -n 1)
 \`\`\`" > roa/README.md
 
 # Commit latest version of ROA files
-git -C roa/ add roa/*
-git -C roa/ commit roa/* -m "Updated ROA files - $ISO_DATE" --quiet
+git -C roa/ add README.md *.conf *.json
+git -C roa/ commit -m "Updated ROA files - $ISO_DATE" --quiet
 
 # Push ROA repository to every remote configured
 for REMOTE in $(git -C roa/ remote | egrep -v upstream | paste -sd " " -) ; do git -C roa/ push $REMOTE master:master --quiet ; done
