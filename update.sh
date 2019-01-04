@@ -44,5 +44,8 @@ $(git -C ../registry/ log -n 1)
 git -C roa/ add roa/*
 git -C roa/ commit roa/* -m "Updated ROA files - $ISO_DATE" --quiet
 
-# Push repository to every remote configured
+# Push ROA repository to every remote configured
+for REMOTE in $(git -C roa/ remote | egrep -v upstream | paste -sd " " -) ; do git -C roa/ push $REMOTE master:master --quiet ; done
+
+# Push local roagen repository to every remote configured 
 for REMOTE in $(git remote | egrep -v upstream | paste -sd " " -) ; do git push $REMOTE master:master --quiet ; done
