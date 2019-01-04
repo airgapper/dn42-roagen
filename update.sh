@@ -8,6 +8,18 @@ git -C ../registry/ pull upstream master:master --quiet 2>&1
 # Checkout master branch in dn42/repository
 git -C ../registry/ checkout master --quiet
 
+# Do a git pull beforehand to ensure our repository is up-to-date
+git checkout master
+git pull origin master:master
+
+# Do the same for sub-repo if exists
+if [ -d roa/.git/ ] ; then
+  git -C roa/ checkout master --quiet
+  if [ $(git -C roa/ remote | grep origin) ] ; then
+    git -C roa/ pull origin master:master --quiet
+  fi
+fi
+
 # Update with data from registry
 php roagen.php
 php rfc8416.php
