@@ -1,5 +1,7 @@
 <?php
 
+// Load lib files.
+require ("lib/constants.php");
 require ("lib/define.php");
 require ("lib/functions.php");
 
@@ -97,7 +99,7 @@ foreach ($raw_array as $sub_array)
 
     $roas["roas"][$k]["asn"] = $_asn[0];
     $roas["roas"][$k]["prefix"] = $_prefix;
-    $roas["roas"][$k]["maxLength"] = ($_asn[0] != "AS0" ? $_maxlength : 128);
+    $roas["roas"][$k]["maxLength"] = ($_asn[0] != "AS0" ? $_maxlength : MAX_LEN_IPV6_AS0);
     $roas["roas"][$k]["ta"] = $_ta;
 
     $k++;
@@ -187,7 +189,7 @@ foreach ($raw_array as $sub_array)
 
     $roas["roas"][$k]["asn"] = $_asn[0];
     $roas["roas"][$k]["prefix"] = $_prefix;
-    $roas["roas"][$k]["maxLength"] = ($_asn[0] != "AS0" ? $_maxlength : 32);
+    $roas["roas"][$k]["maxLength"] = ($_asn[0] != "AS0" ? $_maxlength : MAX_LEN_IPV4_AS0);
     $roas["roas"][$k]["ta"] = $_ta;
 
     $k++;

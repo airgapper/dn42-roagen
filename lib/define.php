@@ -9,8 +9,5 @@ $files4 = scandir ("../registry/data/route/");
 // Define array() we are gonna store data inside.
 $roas = array();
 
-define ("MAX_LEN_IPV4", 28);
-define ("MAX_LEN_IPV6", 64);
-
 $web_registry_url = 'https://git.dn42.us/dn42/registry/src/master';
 ?>
