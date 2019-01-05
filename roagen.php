@@ -97,7 +97,7 @@ foreach ($raw_array as $sub_array)
 
     $roas["roas"][$k]["asn"] = $_asn[0];
     $roas["roas"][$k]["prefix"] = $_prefix;
-    $roas["roas"][$k]["maxLength"] = $_maxlength;
+    $roas["roas"][$k]["maxLength"] = ($_asn[0] != "AS0" ? $_maxlength : 128);
     $roas["roas"][$k]["ta"] = $_ta;
 
     $k++;
@@ -187,7 +187,7 @@ foreach ($raw_array as $sub_array)
 
     $roas["roas"][$k]["asn"] = $_asn[0];
     $roas["roas"][$k]["prefix"] = $_prefix;
-    $roas["roas"][$k]["maxLength"] = $_maxlength;
+    $roas["roas"][$k]["maxLength"] = ($_asn[0] != "AS0" ? $_maxlength : 32);
     $roas["roas"][$k]["ta"] = $_ta;
 
     $k++;
