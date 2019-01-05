@@ -52,6 +52,12 @@ echo "## Notes
 $(git -C ../registry/ log -n 1 --merges)
 \`\`\`
 
+## Misc statistics
+
+- ROAs IPv4:  $(cat roa/bird4_route_dn42.conf | grep -v '^#' | grep -v '^$' | wc -l)
+- ROAs IPv6:  $(cat roa/bird6_route_dn42.conf | grep -v '^#' | grep -v '^$' | wc -l)
+- ROAs total: $(cat roa/bird_route_dn42.conf  | grep -v '^#' | grep -v '^$' | wc -l)
+
 [0]: https://git.dn42.us/dn42/registry/commit/$(git -C ../registry/ log -n 1 --merges --pretty='format:%H')
 [1]: https://git.dn42.us/dn42/registry
 " > roa/README.md
