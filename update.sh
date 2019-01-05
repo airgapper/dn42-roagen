@@ -49,10 +49,10 @@ echo "## Notes
 ## [Last commit][0] at [dn42 registry][1]
 
 \`\`\`
-$(git -C ../registry/ log -n 1)
+$(git -C ../registry/ log -n 1 --merges)
 \`\`\`
 
-[0]: https://git.dn42.us/dn42/registry/commit/$(git -C ../registry/ log -n 1 --pretty='format:%H')
+[0]: https://git.dn42.us/dn42/registry/commit/$(git -C ../registry/ log -n 1 --merges --pretty='format:%H')
 [1]: https://git.dn42.us/dn42/registry
 " > roa/README.md
 
