@@ -46,11 +46,15 @@ echo "## Notes
   - bird4_route_dn42.conf
   - bird6_route_dn42.conf
 
-## Last commit at [registry](https://git.dn42.us/dn42/registry/commits/master)
+## [Last commit][0] at [dn42 registry][1]
 
 \`\`\`
 $(git -C ../registry/ log -n 1)
-\`\`\`" > roa/README.md
+\`\`\`
+
+[0]: https://git.dn42.us/dn42/registry/commit/$(git -C ../registry/ log -n 1 --pretty='format:%H')
+[1]: https://git.dn42.us/dn42/registry
+" > roa/README.md
 
 # Commit latest version of ROA files
 git -C roa/ add README.md *.conf *.json
