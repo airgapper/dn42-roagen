@@ -57,19 +57,19 @@ function writeBirdConfig ($roas)
 {
   $json = json_encode($roas, JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT);
 
-  $bird1_fq = fopen ('roa/bird_roa_dn42.conf', 'w');
+  $bird1_fq  = fopen ('roa/bird_roa_dn42.conf',  'w');
   $bird1_fq4 = fopen ('roa/bird4_roa_dn42.conf', 'w');
   $bird1_fq6 = fopen ('roa/bird6_roa_dn42.conf', 'w');
 
-  $bird2_fq = fopen ('roa/bird_route_dn42.conf', 'w');
+  $bird2_fq  = fopen ('roa/bird_route_dn42.conf',  'w');
   $bird2_fq4 = fopen ('roa/bird4_route_dn42.conf', 'w');
   $bird2_fq6 = fopen ('roa/bird6_route_dn42.conf', 'w');
 
-  fwrite ($bird1_fq, shell_exec ("/usr/bin/git -C ../registry/ log -n 1  --merges | sed 's/^/# /g'"));
+  fwrite ($bird1_fq,  shell_exec ("/usr/bin/git -C ../registry/ log -n 1  --merges | sed 's/^/# /g'"));
   fwrite ($bird1_fq4, shell_exec ("/usr/bin/git -C ../registry/ log -n 1  --merges | sed 's/^/# /g'"));
   fwrite ($bird1_fq6, shell_exec ("/usr/bin/git -C ../registry/ log -n 1  --merges | sed 's/^/# /g'"));
 
-  fwrite ($bird2_fq, shell_exec ("/usr/bin/git -C ../registry/ log -n 1  --merges | sed 's/^/# /g'"));
+  fwrite ($bird2_fq,  shell_exec ("/usr/bin/git -C ../registry/ log -n 1  --merges | sed 's/^/# /g'"));
   fwrite ($bird2_fq4, shell_exec ("/usr/bin/git -C ../registry/ log -n 1  --merges | sed 's/^/# /g'"));
   fwrite ($bird2_fq6, shell_exec ("/usr/bin/git -C ../registry/ log -n 1  --merges | sed 's/^/# /g'"));
 
@@ -93,7 +93,7 @@ function writeBirdConfig ($roas)
     else
     {
       fwrite ($bird1_fq4, $bird1_strng);
-      fwrite ($bird2_fq6, $bird2_strng);
+      fwrite ($bird2_fq4, $bird2_strng);
     }
   }
 
