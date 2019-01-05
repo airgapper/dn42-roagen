@@ -97,7 +97,7 @@ foreach ($raw_array as $sub_array)
     // Extract ASxxxxx from string.
     preg_match ("/AS[0-9]+/", explode (":", $asn)[1], $_asn);
 
-    $roas["roas"][$k]["asn"] = $_asn[0];
+    $roas["roas"][$k]["asn"] = trim ($_asn[0], "AS");
     $roas["roas"][$k]["prefix"] = $_prefix;
     $roas["roas"][$k]["maxLength"] = ($_asn[0] != "AS0" ? $_maxlength : MAX_LEN_IPV6_AS0);
     $roas["roas"][$k]["ta"] = $_ta;
@@ -187,7 +187,7 @@ foreach ($raw_array as $sub_array)
     // Extract ASxxxxx from string.
     preg_match ("/AS[0-9]+/", explode (":", $asn)[1], $_asn);
 
-    $roas["roas"][$k]["asn"] = $_asn[0];
+    $roas["roas"][$k]["asn"] = trim ($_asn[0], "AS");
     $roas["roas"][$k]["prefix"] = $_prefix;
     $roas["roas"][$k]["maxLength"] = ($_asn[0] != "AS0" ? $_maxlength : MAX_LEN_IPV4_AS0);
     $roas["roas"][$k]["ta"] = $_ta;

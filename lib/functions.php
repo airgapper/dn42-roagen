@@ -119,6 +119,13 @@ function writeRoutinatorExceptionFile ($roas)
 
 function writeExportJSON ($roas)
 {
+  $n = 0;
+  foreach ($roas['roas'] as $object)
+  {
+    $roas['roas'][$n]['asn'] = "AS" . $roas['roas'][$n]['asn'];
+    $n++;
+  }
+
   $json = json_encode($roas, JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT);
 
   $fp = fopen ('roa/export_dn42.json', 'w');
