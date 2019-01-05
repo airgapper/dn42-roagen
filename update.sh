@@ -46,7 +46,7 @@ echo "## Notes
   - bird4_route_dn42.conf
   - bird6_route_dn42.conf
 
-## Last commit at [registry](https://git.dn42.us/dn42/registry)
+## Last commit at [registry](https://git.dn42.us/dn42/registry/commits/master)
 
 \`\`\`
 $(git -C ../registry/ log -n 1)
