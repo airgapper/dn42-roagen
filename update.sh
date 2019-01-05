@@ -45,6 +45,10 @@ echo "## Notes
   - bird_route_dn42.conf
   - bird4_route_dn42.conf
   - bird6_route_dn42.conf
+- These files are [Routinator][2] compatible:
+  - export_rfc8416_dn42.json _(SLURM standard, format specified in [RFC 8416][4])_
+- These files are [gortr][3] compatible:
+  - export_dn42.json
 
 ## [Last commit][0] at [dn42 registry][1]
 
@@ -60,6 +64,9 @@ $(git -C ../registry/ log -n 1 --merges)
 
 [0]: https://git.dn42.us/dn42/registry/commit/$(git -C ../registry/ log -n 1 --merges --pretty='format:%H')
 [1]: https://git.dn42.us/dn42/registry
+[2]: https://github.com/NLnetLabs/routinator
+[3]: https://github.com/cloudflare/gortr
+[4]: https://tools.ietf.org/html/rfc8416
 " > roa/README.md
 
 # Commit latest version of ROA files
