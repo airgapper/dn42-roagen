@@ -1,5 +1,15 @@
 ## dn42-roagen
 
+This ROA generator honors the following principles:
+
+- All routes listed with origin AS0 is per [RFC 6483 section 4][0] set with max-length
+  to 128 (v6) or /32 (v4). This is done intentionally to fail ROA validaton and thereby
+  avoid the prefix being routed inside DN42. This is desible if a prefix is e.g. only
+  intended for use with eBGP direct peering.
+- This ROA generator is compliant with max-length value in route(6) objects present in
+  the registry. If no max-length is set for a given route(6) object. The legacy max-length
+  is used. This is /28 (v4) or /64 (v6).
+
 ### Requirements for running
 
 1. Verify curl, git, bash, and php is installed.
@@ -67,3 +77,5 @@ $ tree -L 3 ~/dn42/
     |-- roagen.php
     `-- update.sh
 ```
+
+[0]: https://tools.ietf.org/html/rfc6483#section-4
