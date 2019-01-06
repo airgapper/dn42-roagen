@@ -50,11 +50,19 @@ echo "## Notes
 - These files are [gortr][3] compatible:
   - [export_dn42.json](export_dn42.json)
 
-## [Last commit][0] at [dn42 registry][1]
+## [Last merge commit][0] at [dn42 registry][1]
 
 \`\`\`
 $(git -C ../registry/ log -n 1 --merges)
 \`\`\`
+
+## crontab
+
+You can setup a cronjob to check in with updates to the ROA files listed
+above on regular intervals.
+
+Currently the ROA files published here is refreshed every 3rd hour if
+updates has been made to the [DN42 registry[1].
 
 ## Misc statistics
 
