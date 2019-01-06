@@ -3,7 +3,7 @@
 This ROA generator honors the following principles:
 
 - All routes listed with origin AS0 is per [RFC 6483 section 4][0] set with max-length
-  to 128 (v6) or /32 (v4). This is done intentionally to fail ROA validaton and thereby
+  to /128 (v6) or /32 (v4). This is done intentionally to fail ROA validaton and thereby
   avoid the prefix being routed inside DN42. This is desible if a prefix is e.g. only
   intended for use with eBGP direct peering.
 - This ROA generator is compliant with max-length value in route(6) objects present in
