@@ -123,6 +123,7 @@ function writeExportJSON ($roas)
   foreach ($roas['roas'] as $object)
   {
     $roas['roas'][$n]['asn'] = "AS" . $roas['roas'][$n]['asn'];
+    $roas['roas'][$n]['maxLength'] = (int)preg_replace('/\D/', '', $roas['roas'][$n]['maxLength']); // Ensure unquoted integer
     $n++;
   }
 
