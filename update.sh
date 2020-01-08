@@ -78,8 +78,16 @@ updates has been made to the [DN42 registry][1].
 [5]: doc/crontab.md
 " > roa/README.md
 
+# computer checksums
+for FILE in $(ls -1 roa/{bird*.conf,export*.json,README.md} | sed -e 's_roa/__g' | xargs) ; do
+  #md5sum roa/${FILE} > roa/${FILE}.md5
+  #sha1sum roa/${FILE} > roa/${FILE}.sha1
+  sha256sum roa/${FILE} > roa/${FILE}.sha256
+  #sha512sum roa/${FILE} > roa/${FILE}.sha512
+done
+
 # Commit latest version of ROA files
-git -C roa/ add README.md *.conf *.json
+git -C roa/ add README.md *.conf *.json *.sha256
 git -C roa/ commit -m "Updated ROA files - $ISO_DATE" --quiet
 
 # Push ROA repository to every remote configured

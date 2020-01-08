@@ -48,6 +48,7 @@ foreach ($files6 as $file)
     elseif (startsWith ($str, "source", 6)) $raw_array[$i]["source"]    = $str;
     elseif (startsWith ($str, "route6", 6)) $raw_array[$i]["route"]     = $str;
     elseif (startsWith ($str, "origin", 6)) $raw_array[$i]["asn"][$j++] = $str;
+    elseif (startsWith ($str, "mnt",    3)) $raw_array[$i]["mnt"]       = $str;
 
     // Catch max-length not set in route object.
     if (empty ($raw_array[$i]["max"])) $raw_array[$i]["max"] = -1;
@@ -79,6 +80,12 @@ foreach ($raw_array as $sub_array)
      explode (":", $sub_array["max"])[1],
      $maxlength);
 
+  // Extract mnt-by information
+  $mnt = array();
+  preg_match ("/([A-Z0-9\-]+)/",
+   explode (":", $sub_array["mnt"])[1],
+   $mnt);
+
   // Store extracted values
   $_prefix = $prefix[0];
   $_ta  = (isset ($source[0]) ? $source[0] : "");
@@ -89,6 +96,8 @@ foreach ($raw_array as $sub_array)
   else
     // Do fallback to default prefix size if max-length was not set.
     $_maxlength = ($prefix[2] < MAX_LEN_IPV6 ? MAX_LEN_IPV6 : $prefix[2]);
+
+  $_mnt = $mnt[0];
 
   // Loop through each asn in single route6 object and assign
   // other values accordingly.
@@ -101,6 +110,7 @@ foreach ($raw_array as $sub_array)
     $roas["roas"][$k]["prefix"] = $_prefix;
     $roas["roas"][$k]["maxLength"] = ($_asn[0] != "AS0" ? $_maxlength : MAX_LEN_IPV6_AS0);
     $roas["roas"][$k]["ta"] = $_ta;
+    $roas["roas"][$k]["mnt-by"] = $_mnt;
 
     $k++;
   }
@@ -140,6 +150,7 @@ foreach ($files4 as $file)
     elseif (startsWith ($str, "source", 6)) $raw_array[$i]["source"]    = $str;
     elseif (startsWith ($str, "route",  5)) $raw_array[$i]["route"]     = $str;
     elseif (startsWith ($str, "origin", 6)) $raw_array[$i]["asn"][$j++] = $str;
+    elseif (startsWith ($str, "mnt",    3)) $raw_array[$i]["mnt"]       = $str;
 
     // Catch max-length not set in route object.
     if (empty ($raw_array[$i]["max"])) $raw_array[$i]["max"] = -1;
@@ -169,6 +180,12 @@ foreach ($raw_array as $sub_array)
      explode (":", $sub_array["max"])[1],
      $maxlength);
 
+  // Extract mnt-by information
+  $mnt = array();
+  preg_match ("/([A-Z0-9\-]+)/",
+   explode (":", $sub_array["mnt"])[1],
+   $mnt);
+
   // Store extracted values
   $_prefix = $prefix[0];
   $_ta = (isset ($source[0]) ? $source[0] : "");
@@ -179,6 +196,8 @@ foreach ($raw_array as $sub_array)
   else
     // Do fallback to default prefix size if max-length was not set.
     $_maxlength = ($prefix[2] < MAX_LEN_IPV4 ? MAX_LEN_IPV4 : $prefix[2]);
+
+  $_mnt = $mnt[0];
 
   // Loop through each asn in single route6 object and assign
   // other values accordingly.
@@ -191,10 +210,31 @@ foreach ($raw_array as $sub_array)
     $roas["roas"][$k]["prefix"] = $_prefix;
     $roas["roas"][$k]["maxLength"] = ($_asn[0] != "AS0" ? $_maxlength : MAX_LEN_IPV4_AS0);
     $roas["roas"][$k]["ta"] = $_ta;
+    $roas["roas"][$k]["mnt-by"] = $_mnt;
 
     $k++;
   }
 }
+
+/*
+ * Function: Add metadata
+ *
+ * Add info
+ * 1. generation time (now),
+ * 2. expire time (now+7d),
+ * 3. number of routes
+ */
+
+$roaFileCreated = (int)( date_format( new \DateTime( "now",  new \DateTimeZone( "UTC" ) ), "U" ) );
+$roaFileExpire = (int)( date_format( date_modify( new \DateTime( "now",  new \DateTimeZone( "UTC" ) ), "+3 day" ), "U" ) );
+
+$roas["metadata"]["counts"] = (int)count($roas["roas"]);
+$roas["metadata"]["generated"] = $roaFileCreated;
+$roas["metadata"]["valid"] = $roaFileExpire;
+/*
+$roas["metadata"]["signature"] = "";
+$roas["metadata"]["signatureData"] = "";
+*/
 
 writeExportJSON($roas);
 writeBirdConfig($roas);

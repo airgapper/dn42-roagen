@@ -75,17 +75,22 @@ function writeBirdConfig ($roas)
 
   foreach ($roas["roas"] as $roa)
   {
-    $prfx = $roa["prefix"];
-    $mxLngth = $roa["maxLength"];
-    $sn = $roa["asn"];
+    $prefix = $roa["prefix"];
+    $maxLength = $roa["maxLength"];
+    $asn = $roa["asn"];
+    $source = $roa["ta"];
+    $mntby = $roa["mnt-by"];
 
-    $bird1_strng = "roa $prfx max $mxLngth as $sn;\n";
-    $bird2_strng = "route $prfx max $mxLngth as $sn;\n";
+    $bird_strng = "$prefix max $maxLength as $asn;";
+    $bird_strng .= " # $source/$mntby";
+
+    $bird1_strng = "roa $bird_strng\n";
+    $bird2_strng = "route $bird_strng\n";
 
     fwrite ($bird1_fq, $bird1_strng);
     fwrite ($bird2_fq, $bird2_strng);
 
-    if (strpos ($prfx, ":") !== false)
+    if (strpos ($prefix, ":") !== false)
     {
       fwrite ($bird1_fq6, $bird1_strng);
       fwrite ($bird2_fq6, $bird2_strng);
