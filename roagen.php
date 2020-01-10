@@ -221,18 +221,22 @@ foreach ($raw_array as $sub_array)
  *
  * Add info
  * 1. generation time (now),
- * 2. expire time (now+7d),
+ * 2. expire time (now + 3 days),
  * 3. number of routes
+ *
+ * Numbers must be unquoted integers, and timeformat must
+ * be epoch format. TImezone is set to Etc/UTC.
  */
 
-$roaFileCreated = (int)( date_format( new \DateTime( "now",  new \DateTimeZone( "UTC" ) ), "U" ) );
-$roaFileExpire = (int)( date_format( date_modify( new \DateTime( "now",  new \DateTimeZone( "UTC" ) ), "+3 day" ), "U" ) );
+$roaRegistryCount       = (int)count($roas["roas"]);
+$roaFileDateTimeCreated = (int)( date_format( new \DateTime( "now",  new \DateTimeZone( "UTC" ) ), "U" ) );
+$roaFileDateTimeExpire  = (int)( date_format( date_modify( new \DateTime( "now",  new \DateTimeZone( "UTC" ) ), "+3 day" ), "U" ) );
 
-$roas["metadata"]["counts"] = (int)count($roas["roas"]);
-$roas["metadata"]["generated"] = $roaFileCreated;
-$roas["metadata"]["valid"] = $roaFileExpire;
+$roas["metadata"]["counts"]        = $roaRegistryCount;
+$roas["metadata"]["generated"]     = $roaFileDateTimeCreated;
+$roas["metadata"]["valid"]         = $roaFileDateTimeExpire;
 /*
-$roas["metadata"]["signature"] = "";
+$roas["metadata"]["signature"]     = "";
 $roas["metadata"]["signatureData"] = "";
 */
 
