@@ -227,18 +227,17 @@ foreach ($raw_array as $sub_array)
  * Numbers must be unquoted integers, and timeformat must
  * be epoch format. TImezone is set to Etc/UTC.
  */
-
-$roaRegistryCount       = (int)count($roas["roas"]);
-$roaFileDateTimeCreated = (int)( date_format( new \DateTime( "now",  new \DateTimeZone( "UTC" ) ), "U" ) );
-$roaFileDateTimeExpire  = (int)( date_format( date_modify( new \DateTime( "now",  new \DateTimeZone( "UTC" ) ), "+3 day" ), "U" ) );
-
-$roas["metadata"]["counts"]        = $roaRegistryCount;
-$roas["metadata"]["generated"]     = $roaFileDateTimeCreated;
-$roas["metadata"]["valid"]         = $roaFileDateTimeExpire;
+$roas["metadata"]["counts"] = (int)count($roas["roas"]);
+$roas["metadata"]["generated"] = (int)(date_format(new \DateTime("now",  new \DateTimeZone("UTC")), "U"));
+$roas["metadata"]["valid"] = (int)(date_format(date_modify(new \DateTime("now",  new \DateTimeZone("UTC")), "+3 day"), "U"));
 /*
-$roas["metadata"]["signature"]     = "";
+$roas["metadata"]["signature"] = "";
 $roas["metadata"]["signatureData"] = "";
 */
+
+// Additional human readbable DateTime format, example: 2013-04-12T15:52:01+00:00
+$roas["metadata"]["human"]["generated"] = date_format(new \DateTime("now",  new \DateTimeZone("UTC")), "DATE_W3C");
+$roas["metadata"]["human"]["valid"] = date_format(date_modify(new \DateTime("now",  new \DateTimeZone("UTC")), "+3 day"), "DATE_W3C");
 
 writeExportJSON($roas);
 writeBirdConfig($roas);
