@@ -236,8 +236,8 @@ $roas["metadata"]["signatureData"] = "";
 */
 
 // Additional human readbable DateTime format, example: 2013-04-12T15:52:01+00:00
-$roas["metadata"]["human"]["generated"] = date_format(new \DateTime("now",  new \DateTimeZone("UTC")), "DATE_W3C");
-$roas["metadata"]["human"]["valid"] = date_format(date_modify(new \DateTime("now",  new \DateTimeZone("UTC")), "+3 day"), "DATE_W3C");
+$roas["metadata"]["human"]["generated"] = date_format(new \DateTime("now",  new \DateTimeZone("UTC")), "c");
+$roas["metadata"]["human"]["valid"] = date_format(date_modify(new \DateTime("now",  new \DateTimeZone("UTC")), "+3 day"), "c");
 
 writeExportJSON($roas);
 writeBirdConfig($roas);
