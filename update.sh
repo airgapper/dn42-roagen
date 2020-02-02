@@ -56,7 +56,10 @@ Note the gortr file is DateTime stamped only, it is not signed with any certific
 ## [Last merge commit][0] at [dn42 registry][1]
 
 \`\`\`
-$(git -C ../registry/ log -n 1 --merges | sed -E -e 's/^Author: ([a-zA-Z0-9]+) <.*>/Author: \1/' -e 's/^commit ([a-f0-9]+).*/commit \1/')
+$(git -C ../registry/ log -n 1 --date=iso8601 --merges |
+  sed -E -e 's/^Author: ([a-zA-Z0-9]+) <.*>/Author: \1/' \
+  -e 's/^commit ([a-f0-9]+) .*/commit \1/' \
+  -e 's/[ ]+$//g' )
 \`\`\`
 
 ## crontab
