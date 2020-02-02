@@ -65,13 +65,17 @@ function writeBirdConfig ($roas)
   $bird2_fq4 = fopen ('roa/bird4_route_dn42.conf', 'w');
   $bird2_fq6 = fopen ('roa/bird6_route_dn42.conf', 'w');
 
+  /*
   fwrite ($bird1_fq,  shell_exec ("/usr/bin/git -C ../registry/ log -n 1  --merges | sed 's/^/# /g'"));
   fwrite ($bird1_fq4, shell_exec ("/usr/bin/git -C ../registry/ log -n 1  --merges | sed 's/^/# /g'"));
   fwrite ($bird1_fq6, shell_exec ("/usr/bin/git -C ../registry/ log -n 1  --merges | sed 's/^/# /g'"));
+  */
 
+  /*
   fwrite ($bird2_fq,  shell_exec ("/usr/bin/git -C ../registry/ log -n 1  --merges | sed 's/^/# /g'"));
   fwrite ($bird2_fq4, shell_exec ("/usr/bin/git -C ../registry/ log -n 1  --merges | sed 's/^/# /g'"));
   fwrite ($bird2_fq6, shell_exec ("/usr/bin/git -C ../registry/ log -n 1  --merges | sed 's/^/# /g'"));
+  */
 
   foreach ($roas["roas"] as $roa)
   {
