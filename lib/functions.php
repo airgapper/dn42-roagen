@@ -20,9 +20,7 @@ function checkoutMaster ()
  */
 function startsWith ($haystack, $needle, $length = "0")
 {
-  if ($length <= 0 || $length > (strlen ($needle)))
-    $length = strlen ($needle);
-
+  if ($length <= 0 || $length > (strlen ($needle))) $length = strlen ($needle);
   return (substr ($haystack, 0, $length) === $needle);
 }
 
@@ -35,10 +33,7 @@ function startsWith ($haystack, $needle, $length = "0")
 function endsWith ($haystack, $needle)
 {
   $length = strlen ($needle);
-
-  if ($length == 0)
-    return true;
-
+  if ($length == 0) return true;
   return (substr( $haystack, -$length) === $needle);
 }
 
@@ -85,8 +80,7 @@ function writeBirdConfig ($roas)
     $source = $roa["ta"];
     $mntby = $roa["mnt-by"];
 
-    $bird_strng = "$prefix max $maxLength as $asn;";
-    $bird_strng .= " # $source/$mntby";
+    $bird_strng = "$prefix max $maxLength as $asn; # $source/$mntby";
 
     $bird1_strng = "roa $bird_strng\n";
     $bird2_strng = "route $bird_strng\n";
@@ -118,11 +112,8 @@ function writeBirdConfig ($roas)
 function writeRoutinatorExceptionFile ($roas)
 {
   $json = json_encode($roas, JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT|JSON_NUMERIC_CHECK);
-
   $fp = fopen('roa/export_rfc8416_dn42.json', 'w');
-
   fwrite($fp, $json);
-
   fclose($fp);
 }
 
@@ -135,13 +126,9 @@ function writeExportJSON ($roas)
     $roas['roas'][$n]['maxLength'] = (int)preg_replace('/\D/', '', $roas['roas'][$n]['maxLength']); // Ensure unquoted integer
     $n++;
   }
-
   $json = json_encode($roas, JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT);
-
   $fp = fopen ('roa/export_dn42.json', 'w');
-
   fwrite ($fp, $json);
-
   fclose ($fp);
 }
 

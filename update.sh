@@ -12,6 +12,11 @@ git -C ../registry/ checkout master --quiet
 git checkout master --quiet
 git pull origin master:master --quiet --rebase
 
+if ! [ -d roa/ ] ; then mkdir -p roa ; fi
+for file in README.md {bird,bird4,bird6}_{route,roa}_dn42.conf export{_rfc8416,}_dn42.json ; do
+  if ! [ -f roa/$file ] ; then touch roa/$file ; fi
+done
+
 # Do the same for sub-repo if exists
 if [ -d roa/.git/ ] ; then
   git -C roa/ checkout master --quiet
@@ -28,7 +33,7 @@ php rfc8416.php
 if [ ! -d roa/ ] ; then mkdir roa ; fi
 if [ ! -f roa/.git/config ] ; then
   git -C roa/ init
-  if [ ! -f roa/README.md ; then
+  if [ ! -f roa/README.md ] ; then
     touch roa/README.md
     echo '## roas' | tee roa/README.md ; fi
   git -C roa/ commit --allow-empty -m "Initial commit"
