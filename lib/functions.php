@@ -50,7 +50,7 @@ function trim_special_chars ($string)
 
 function writeBirdConfig ($roas)
 {
-  $json = json_encode($roas, JSON_UNESCAPED_SLASHES);
+  $json = json_encode($roas, JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT);
 
   $bird1_fq  = fopen ('roa/bird_roa_dn42.conf',  'w');
   $bird1_fq4 = fopen ('roa/bird4_roa_dn42.conf', 'w');
@@ -111,7 +111,7 @@ function writeBirdConfig ($roas)
 
 function writeRoutinatorExceptionFile ($roas)
 {
-  $json = json_encode($roas, JSON_UNESCAPED_SLASHES|JSON_NUMERIC_CHECK);
+  $json = json_encode($roas, JSON_UNESCAPED_SLASHES|JSON_PRETTY_PRINT|JSON_NUMERIC_CHECK);
   $fp = fopen('roa/export_rfc8416_dn42.json', 'w');
   fwrite($fp, $json);
   fclose($fp);
