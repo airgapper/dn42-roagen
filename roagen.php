@@ -8,7 +8,7 @@ require ("lib/functions.php");
 // Define array() we are going to populate with data.
 $roas["_comments"]["modified"]["commit"] = shell_exec ("/usr/bin/git -C ../registry/ log -n 1 --date=iso8601 --merges --pretty='format:%H'");
 $roas["_comments"]["modified"]["merge"] = shell_exec ("/usr/bin/git -C ../registry/ log -n 1 --date=iso8601 --merges --pretty='format:%p'");
-$roas["_comments"]["modified"]["author"] = shell_exec ("/usr/bin/git -C ../registry/ log -n 1 --date=iso8601 --merges --pretty='format:%an <%ae>'");
+$roas["_comments"]["modified"]["author"] = shell_exec ("/usr/bin/git -C ../registry/ log -n 1 --date=iso8601 --merges --pretty='format:%an'");
 $roas["_comments"]["modified"]["date"] = shell_exec ("/usr/bin/git -C ../registry/ log -n 1 --date=iso8601 --merges --pretty='format:%aD'");
 $roas["_comments"]["modified"]["subject"] = shell_exec ("/usr/bin/git -C ../registry/ log -n 1 --date=iso8601 --merges --pretty='format:%s'");
 $roas["_comments"]["modified"]["url"] = "https://git.dn42.us/dn42/registry/commit/";
