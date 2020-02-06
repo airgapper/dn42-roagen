@@ -109,8 +109,8 @@ foreach ($raw_array as $sub_array)
     $roas["roas"][$k]["asn"] = trim ($_asn[0], "AS");
     $roas["roas"][$k]["prefix"] = $_prefix;
     $roas["roas"][$k]["maxLength"] = ($_asn[0] != "AS0" ? $_maxlength : MAX_LEN_IPV6_AS0);
-    $roas["roas"][$k]["url"]["inetnum"] = "$web_registry_url/data/inet6num/$prefix[1]_$prefix[2]";
-    $roas["roas"][$k]["url"]["route"] = "$web_registry_url/data/route6/$prefix[1]_$prefix[2]";
+    //$roas["roas"][$k]["url"]["inetnum"] = "$web_registry_url/data/inet6num/$prefix[1]_$prefix[2]";
+    //$roas["roas"][$k]["url"]["route"] = "$web_registry_url/data/route6/$prefix[1]_$prefix[2]";
     $roas["roas"][$k]["ta"] = $_ta;
     $roas["roas"][$k]["mnt-by"] = $_mnt;
 
@@ -211,8 +211,8 @@ foreach ($raw_array as $sub_array)
     $roas["roas"][$k]["asn"] = trim ($_asn[0], "AS");
     $roas["roas"][$k]["prefix"] = $_prefix;
     $roas["roas"][$k]["maxLength"] = ($_asn[0] != "AS0" ? $_maxlength : MAX_LEN_IPV4_AS0);
-    $roas["roas"][$k]["url"]["inetnum"] = "$web_registry_url/data/inetnum/$prefix[1]_$prefix[2]";
-    $roas["roas"][$k]["url"]["route"] = "$web_registry_url/data/route/$prefix[1]_$prefix[2]";
+    //$roas["roas"][$k]["url"]["inetnum"] = "$web_registry_url/data/inetnum/$prefix[1]_$prefix[2]";
+    //$roas["roas"][$k]["url"]["route"] = "$web_registry_url/data/route/$prefix[1]_$prefix[2]";
     $roas["roas"][$k]["ta"] = $_ta;
     $roas["roas"][$k]["mnt-by"] = $_mnt;
 
