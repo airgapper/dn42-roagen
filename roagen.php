@@ -6,34 +6,7 @@ require ("lib/define.php");
 require ("lib/functions.php");
 
 // Define array() we are going to populate with data.
-$roas["metadata"]["human"]["commit"] = shell_exec ("/usr/bin/git -C ../registry/ log -n 1 --date=iso8601 --merges --pretty='format:%H'");
-$roas["metadata"]["human"]["merge"] = shell_exec ("/usr/bin/git -C ../registry/ log -n 1 --date=iso8601 --merges --pretty='format:%p'");
-$roas["metadata"]["human"]["author"] = shell_exec ("/usr/bin/git -C ../registry/ log -n 1 --date=iso8601 --merges --pretty='format:%an'");
-$roas["metadata"]["human"]["date"] = shell_exec ("/usr/bin/git -C ../registry/ log -n 1 --date=iso8601 --merges --pretty='format:%aD'");
-$roas["metadata"]["human"]["subject"] = shell_exec ("/usr/bin/git -C ../registry/ log -n 1 --date=iso8601 --merges --pretty='format:%s'");
-$roas["metadata"]["human"]["url"] = "https://git.dn42.us/dn42/registry/commit/";
-$roas["metadata"]["human"]["url"] .= $roas["metadata"]["human"]["commit"];
-
-/*
- * Function: Add metadata
- *
- * Add info
- * 1. generation time (now),
- * 2. expire time (now + 3 days),
- * 3. number of routes
- *
- * Numbers must be unquoted integers, and timeformat must
- * be epoch format. TImezone is set to Etc/UTC.
- */
-$roas["metadata"]["counts"] = (int)count($roas["roas"]);
-$roas["metadata"]["generated"] = (int)(date_format(new \DateTime("now",new \DateTimeZone("UTC")),"U"));
-$roas["metadata"]["valid"] = (int)(date_format(date_modify(new \DateTime("now",new \DateTimeZone("UTC")),"+3day"),"U"));
-//$roas["metadata"]["signature"] = "";
-//$roas["metadata"]["signatureData"] = "";
-
-// Additional human read-able DateTime format, example: 2013-04-12T15:52:01+00:00
-$roas["metadata"]["human"]["generated"] = date_format(new \DateTime("now",new \DateTimeZone("UTC")),"c");
-$roas["metadata"]["human"]["valid"] = date_format(date_modify(new \DateTime("now",new \DateTimeZone("UTC")),"+3day"),"c");
+$roas[] = array();
 
 /*
  *
@@ -240,6 +213,35 @@ foreach ($raw_array as $sub_array)
     $k++;
   }
 }
+
+$roas["metadata"]["human"]["commit"] = shell_exec ("/usr/bin/git -C ../registry/ log -n 1 --date=iso8601 --merges --pretty='format:%H'");
+$roas["metadata"]["human"]["merge"] = shell_exec ("/usr/bin/git -C ../registry/ log -n 1 --date=iso8601 --merges --pretty='format:%p'");
+$roas["metadata"]["human"]["author"] = shell_exec ("/usr/bin/git -C ../registry/ log -n 1 --date=iso8601 --merges --pretty='format:%an'");
+$roas["metadata"]["human"]["date"] = shell_exec ("/usr/bin/git -C ../registry/ log -n 1 --date=iso8601 --merges --pretty='format:%aD'");
+$roas["metadata"]["human"]["subject"] = shell_exec ("/usr/bin/git -C ../registry/ log -n 1 --date=iso8601 --merges --pretty='format:%s'");
+$roas["metadata"]["human"]["url"] = "https://git.dn42.us/dn42/registry/commit/";
+$roas["metadata"]["human"]["url"] .= $roas["metadata"]["human"]["commit"];
+
+/*
+ * Function: Add metadata
+ *
+ * Add info
+ * 1. generation time (now),
+ * 2. expire time (now + 3 days),
+ * 3. number of routes
+ *
+ * Numbers must be unquoted integers, and timeformat must
+ * be epoch format. TImezone is set to Etc/UTC.
+ */
+$roas["metadata"]["counts"] = (int)count($roas["roas"]);
+$roas["metadata"]["generated"] = (int)(date_format(new \DateTime("now",new \DateTimeZone("UTC")),"U"));
+$roas["metadata"]["valid"] = (int)(date_format(date_modify(new \DateTime("now",new \DateTimeZone("UTC")),"+3day"),"U"));
+//$roas["metadata"]["signature"] = "";
+//$roas["metadata"]["signatureData"] = "";
+
+// Additional human read-able DateTime format, example: 2013-04-12T15:52:01+00:00
+$roas["metadata"]["human"]["generated"] = date_format(new \DateTime("now",new \DateTimeZone("UTC")),"c");
+$roas["metadata"]["human"]["valid"] = date_format(date_modify(new \DateTime("now",new \DateTimeZone("UTC")),"+3day"),"c");
 
 writeExportJSON($roas);
 writeBirdConfig($roas);
