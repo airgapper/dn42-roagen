@@ -26,15 +26,15 @@ $roas["metadata"]["human"]["url"] .= $roas["metadata"]["human"]["commit"];
  * Numbersmustbeunquotedintegers,andtimeformatmust
  * beepochformat.TImezoneissettoEtc/UTC.
  */
-$roas["metadata"]["counts"]=(int)count($roas["roas"]);
-$roas["metadata"]["generated"]=(int)(date_format(new \DateTime("now",new \DateTimeZone("UTC")),"U"));
-$roas["metadata"]["valid"]=(int)(date_format(date_modify(new \DateTime("now",new \DateTimeZone("UTC")),"+3day"),"U"));
+$roas["metadata"]["counts"] = (int)count($roas["roas"]);
+$roas["metadata"]["generated"] = (int)(date_format(new \DateTime("now",new \DateTimeZone("UTC")),"U"));
+$roas["metadata"]["valid"] = (int)(date_format(date_modify(new \DateTime("now",new \DateTimeZone("UTC")),"+3day"),"U"));
 //$roas["metadata"]["signature"] = "";
 //$roas["metadata"]["signatureData"] = "";
 
 // Additional human read-able DateTime format, example: 2013-04-12T15:52:01+00:00
-$roas["metadata"]["human"]["generated"]=date_format(new \DateTime("now",new \DateTimeZone("UTC")),"c");
-$roas["metadata"]["human"]["valid"]=date_format(date_modify(new \DateTime("now",new \DateTimeZone("UTC")),"+3day"),"c");
+$roas["metadata"]["human"]["generated"] = date_format(new \DateTime("now",new \DateTimeZone("UTC")),"c");
+$roas["metadata"]["human"]["valid"] = date_format(date_modify(new \DateTime("now",new \DateTimeZone("UTC")),"+3day"),"c");
 
 $roas["validationOutputFilters"]["prefixFilters"] = array();
 $roas["validationOutputFilters"]["bgpsecFilters"] = array();
