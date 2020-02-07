@@ -5,9 +5,6 @@ require ("lib/constants.php");
 require ("lib/define.php");
 require ("lib/functions.php");
 
-// Define array() we are going to populate with data.
-$roas[] = array();
-
 $roas["slurmVersion"] = 1;
 
 $roas["validationOutputFilters"]["prefixFilters"] = array();
