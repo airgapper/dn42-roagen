@@ -220,6 +220,7 @@ foreach ($raw_array as $sub_array)
   }
 }
 
+$roas["metadata"]["human"]["commit"] = shell_exec ("/usr/bin/git -C ../registry/ log -n 1 --date=iso8601 --merges --pretty='format:%H'");
 $roas["metadata"]["human"]["merge"] = shell_exec ("/usr/bin/git -C ../registry/ log -n 1 --date=iso8601 --merges --pretty='format:%p'");
 $roas["metadata"]["human"]["author"] = shell_exec ("/usr/bin/git -C ../registry/ log -n 1 --date=iso8601 --merges --pretty='format:%an'");
 $roas["metadata"]["human"]["date"] = shell_exec ("/usr/bin/git -C ../registry/ log -n 1 --date=iso8601 --merges --pretty='format:%aD'");
