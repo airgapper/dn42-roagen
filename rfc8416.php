@@ -18,13 +18,13 @@ $roas["metadata"]["human"]["url"] .= $roas["metadata"]["human"]["commit"];
 /*
  * Function: Add metadata
  *
- * Addinfo
- * 1.generationtime(now),
- * 2.expiretime(now+3days),
- * 3.numberofroutes
+ * Add info
+ * 1. generation time (now),
+ * 2. expire time (now + 3 days),
+ * 3. number of routes
  *
- * Numbersmustbeunquotedintegers,andtimeformatmust
- * beepochformat.TImezoneissettoEtc/UTC.
+ * Numbers must be unquoted integers, and timeformat must
+ * be epoch format. TImezone is set to Etc/UTC.
  */
 $roas["metadata"]["counts"] = (int)count($roas["roas"]);
 $roas["metadata"]["generated"] = (int)(date_format(new \DateTime("now",new \DateTimeZone("UTC")),"U"));
