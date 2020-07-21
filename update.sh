@@ -3,31 +3,28 @@
 ISO_DATE=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
 
 # Ensure registry repository is up-to-date
-git -C ../registry/ pull upstream master:master --quiet 2>&1
+#git -C ../registry/ pull upstream master:master --quiet 2>&1
 
 # Checkout master branch in dn42/repository
 git -C ../registry/ checkout master --quiet
 
 # Do a git pull beforehand to ensure our repository is up-to-date
-git checkout master --quiet
-git pull origin master:master --quiet --rebase
+#git checkout master --quiet
+#git pull origin master:master --quiet --rebase
 
-if ! [ -d roa/ ] ; then mkdir -p roa ; fi
+if ! [ -d roa ] ; then mkdir -p roa ; fi
+
 for file in README.md {bird,bird4,bird6}_{route,roa}_dn42.conf export{_rfc8416,}_dn42.json ; do
   if ! [ -f roa/$file ] ; then touch roa/$file ; fi
 done
 
 # Do the same for sub-repo if exists
-if [ -d roa/.git/ ] ; then
+if [ -d roa/.git ] ; then
   git -C roa/ checkout master --quiet
   if [ $(git -C roa/ remote | grep origin) ] ; then
     git -C roa/ pull origin master:master --quiet --rebase
   fi
 fi
-
-# Update with data from registry
-php roagen.php
-php rfc8416.php
 
 # Ensure sub-repo is created to track roa file udpates
 if [ ! -d roa/ ] ; then mkdir roa ; fi
@@ -38,6 +35,10 @@ if [ ! -f roa/.git/config ] ; then
     echo '## roas' | tee roa/README.md ; fi
   git -C roa/ commit --allow-empty -m "Initial commit"
   git -C roa/ commit README.md -m "Add README.md" ; fi
+
+# Update with data from registry
+php roagen.php
+php rfc8416.php
 
 # Write out last commit to file
 echo "## Notes
@@ -57,15 +58,12 @@ echo "## Notes
 
 Note the gortr source file is DateTime stamped only, it is not signed with any certificaty. So you will need to add
 \`-verify=false\` as a runtime parameter when loading the cache file. Alternatively, use gortr with a slurm file
-instead (e.g. `-slurm export_rfc8416_dn42.json`) as a command-line parameter.
+instead (e.g. \`-slurm export_rfc8416_dn42.json\`) as a command-line parameter.
 
 ## [Last merge commit][0] at [dn42 registry][1]
 
 \`\`\`
-$(git -C ../registry/ log -n 1 --date=iso8601 --merges |
-  sed -E -e 's/^Author: ([a-zA-Z0-9]+) <.*>/Author: \1/' \
-  -e 's/^commit ([a-f0-9]+) .*/commit \1/' \
-  -e 's/[ ]+$//g' )
+$(git -C ../registry/ log -n 1 --date=iso8601 --merges | grep -v Reviewed- | grep -v Author | sed -E -e 's/^[Cc]ommit ([a-f0-9]+).*/Commit \1/' -e 's/[ ]+$//g')
 \`\`\`
 
 ## crontab
@@ -104,7 +102,8 @@ git -C roa/ add README.md *.conf *.json *.sha256
 git -C roa/ commit -m "Updated ROA files - $ISO_DATE" --quiet
 
 # Push ROA repository to every remote configured
-for REMOTE in $(git -C roa/ remote | egrep -v upstream | paste -sd " " -) ; do git -C roa/ push $REMOTE master:master --quiet ; done
-
-# Push local roagen repository to every remote configured
-for REMOTE in $(git remote | egrep -v upstream | paste -sd " " -) ; do git push $REMOTE master:master --quiet ; done
+if [ $(git -C roa/ remote | grep -vi upstream | wc -l) > 0 ] ; then
+  for REMOTE in $(git -C roa/ remote | grep -vi upstream | paste -sd " " -) ; do
+    git -C roa/ push $REMOTE master:master --quiet
+  done
+fi
