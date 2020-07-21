@@ -224,7 +224,7 @@ foreach ($raw_array as $sub_array)
  */
 $roas["metadata"]["counts"] = (int)count($roas["roas"]);
 $roas["metadata"]["generated"] = (int)(date_format(new \DateTime("now",new \DateTimeZone("UTC")),"U"));
-$roas["metadata"]["valid"] = (int)(date_format(date_modify(new \DateTime("now",new \DateTimeZone("UTC")),"+3day"),"U"));
+$roas["metadata"]["valid"] = (int)(date_format(date_modify(new \DateTime("now",new \DateTimeZone("UTC")),"+5day"),"U"));
 
 writeExportJSON($roas);
 writeBirdConfig($roas);

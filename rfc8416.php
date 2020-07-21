@@ -213,21 +213,6 @@ foreach ($raw_array as $sub_array)
   }
 }
 
-/*
- * Function: Add metadata
- *
- * Add info
- * 1. generation time (now),
- * 2. expire time (now + 3 days),
- * 3. number of routes
- *
- * Numbers must be unquoted integers, and timeformat must
- * be epoch format. TImezone is set to Etc/UTC.
- */
-//$roas["metadata"]["counts"] = (int)count($roas["locallyAddedAssertions"]["prefixAssertions"]);
-//$roas["metadata"]["generated"] = (int)(date_format(new \DateTime("now",new \DateTimeZone("UTC")),"U"));
-//$roas["metadata"]["valid"] = (int)(date_format(date_modify(new \DateTime("now",new \DateTimeZone("UTC")),"+3day"),"U"));
-
 writeRoutinatorExceptionFile($roas);
 
 ?>
