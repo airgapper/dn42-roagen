@@ -80,8 +80,8 @@ updates has been made to the [DN42 registry][1].
 - ROAs IPv6:  $(cat roa/bird6_route_dn42.conf | grep -v '^#' | grep -v '^$' | wc -l)
 - ROAs total: $(cat roa/bird_route_dn42.conf  | grep -v '^#' | grep -v '^$' | wc -l)
 
-[0]: https://git.dn42.us/dn42/registry/commit/$(git -C ../registry/ log -n 1 --merges --pretty='format:%H')
-[1]: https://git.dn42.us/dn42/registry
+[0]: https://git.dn42.dev/dn42/registry/commit/$(git -C ../registry/ log -n 1 --merges --pretty='format:%H')
+[1]: https://git.dn42.dev/dn42/registry
 [2]: https://github.com/NLnetLabs/routinator
 [3]: https://github.com/cloudflare/gortr
 [4]: https://tools.ietf.org/html/rfc8416

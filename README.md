@@ -15,8 +15,8 @@ This ROA generator honors the following principles:
 1. Verify curl, git, bash, and php is installed.
 2. `mkdir -p ~/dn42/`.
 3. `cd ~/dn42/`.
-4. `git clone https://git.dn42.us/netravnen/dn42-roagen.git roagen`.
-5. `git clone https://git.dn42.us/dn42/registry.git`.
+4. `git clone https://git.dn42.dev/as4242420144/roagen.git`.
+5. `git clone https://git.dn42.dev/dn42/registry.git`.
 6. `git -C registry/ remote rename origin upstream && git -C registry/ fetch --all`
 7. Verify everything work by running `cd ~/dn42/roagen/ && ./update.sh`.
 8. In $USER crontab file put `@daily cd ~/dn42/roagen/ && ./update.sh`. Finetune

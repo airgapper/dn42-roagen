@@ -9,5 +9,5 @@ $files4 = scandir ("../registry/data/route/");
 // Define array() we are gonna store data inside.
 $roas = array();
 
-$web_registry_url = 'https://git.dn42.us/dn42/registry/src/master';
+$web_registry_url = 'https://git.dn42.dev/dn42/registry/src/master';
 ?>
